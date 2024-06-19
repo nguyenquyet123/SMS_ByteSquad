@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head>
+
+</head>
+
+<body>
+    <div th:fragment="nav">
+        <header class="header">
+            <div class="container-fluid row">
+                <div class="col-11 d-flex align-items-center">
+                    <img src="path-to-logo.png" alt="Logo" width="100px" height="52px">
+                </div>
+                <div class="col-1 d-flex align-items-center">
+                    <h4>UserName</h4>
+                </div>
+            </div>
+        </header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse row" id="navbarNav">
+                    <ul class="navbar-nav col-11 d-flex align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Tổng quan</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" th:href="@{/hangHoa}" id="hangHoaDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Hàng hóa
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="hangHoaDropdown">
+                                <li><a class="dropdown-item" th:href="@{/danhMuc}">Danh mục</a></li>
+                                <li><a class="dropdown-item" href="#">Kiểm kho</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="giaoDichDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Giao dịch
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="giaoDichDropdown">
+                                <li><a class="dropdown-item" href="#">Danh mục</a></li>
+                                <li><a class="dropdown-item" href="#">Kiểm kho</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="doiTacDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Đối Tác
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="doiTacDropdown">
+                                <li><a class="dropdown-item" href="#">Danh mục</a></li>
+                                <li><a class="dropdown-item" href="#">Kiểm kho</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="baoCaoDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Báo Cáo
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="baoCaoDropdown">
+                                <li><a class="dropdown-item" href="#">Danh mục</a></li>
+                                <li><a class="dropdown-item" href="#">Kiểm kho</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav col-1 d-flex align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Bán Online</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</body>
+
+</html>

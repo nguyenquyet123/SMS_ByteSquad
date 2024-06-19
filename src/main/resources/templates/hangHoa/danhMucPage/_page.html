@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    th:replace="~{/layout/index :: dynamic(~{::main})}" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<head>
+</head>
+
+<body>
+    <main>
+        <div class="row" style="padding: 0 1.5%;">
+            <div class="col-2">
+                <div th:replace="~{/hangHoa/danhMucPage/aside :: aside}"></div>
+            </div>
+            <div class="col-10">
+                <div th:replace="~{/hangHoa/danhMucPage/sesion :: sesion}"></div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
