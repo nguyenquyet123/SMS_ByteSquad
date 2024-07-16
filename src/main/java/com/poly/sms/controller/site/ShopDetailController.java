@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("sms")
 public class ShopDetailController {
 
-    @RequestMapping("shopdetail")
+    @RequestMapping("shopdetails")
     public String shopDetail() {
         return "site/shop-detail";
     }
