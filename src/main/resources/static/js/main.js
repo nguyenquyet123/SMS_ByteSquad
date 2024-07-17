@@ -1,151 +1,74 @@
-(function ($) {
-    "use strict";
+var app = angular.module("myApp", ["ngRoute"]);
 
-    // Spinner
-    var spinner = function () {
-        setTimeout(function () {
-            if ($('#spinner').length > 0) {
-                $('#spinner').removeClass('show');
-            }
-        }, 1);
-    };
-    spinner(0);
+app.config(function ($routeProvider, $httpProvider) {
+  // var auth = "Basic " + btoa("user:123");
+  $httpProvider.defaults.headers.common["Authorization"] =
+    "Basic YWRtaW42OjY2Ng==";
+});
 
+let host = "http://localhost:8080/rest";
 
-    // Fixed Navbar
-    $(window).scroll(function () {
-        if ($(window).width() < 992) {
-            if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow');
-            } else {
-                $('.fixed-top').removeClass('shadow');
-            }
-        } else {
-            if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow').css('top', -55);
-            } else {
-                $('.fixed-top').removeClass('shadow').css('top', 0);
-            }
-        } 
-    });
-    
-    
-   // Back to top button
-   $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $('.back-to-top').fadeIn('slow');
-    } else {
-        $('.back-to-top').fadeOut('slow');
-    }
-    });
-    $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
-        return false;
-    });
+app.controller("CartController", function ($scope, $http) {
+  // var url = `${host}/products/${id}`;
 
+  $scope.ids = [];
+  $scope.product = {};
+  $scope.totalPrice = 0;
 
-    // Testimonial carousel
-    $(".testimonial-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 2000,
-        center: false,
-        dots: true,
-        loop: true,
-        margin: 25,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ],
-        responsiveClass: true,
-        responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:1
-            },
-            992:{
-                items:2
-            },
-            1200:{
-                items:2
-            }
+  $scope.checkIfProductExists = (obj) => {
+    return $scope.ids.some((item) => angular.equals(item, obj));
+  };
+
+  $scope.add = (id) => {
+    $http
+      .get(`/rest/products/${id}`)
+      .then((resp) => {
+        $scope.product = resp.data;
+
+        if ($scope.checkIfProductExists($scope.product)) {
+          return;
         }
-    });
 
+        $scope.ids.push($scope.product);
 
-    // vegetable carousel
-    $(".vegetable-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1500,
-        center: false,
-        dots: true,
-        loop: true,
-        margin: 25,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ],
-        responsiveClass: true,
-        responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            },
-            992:{
-                items:3
-            },
-            1200:{
-                items:4
-            }
-        }
-    });
+        console.log("Success", resp);
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
 
+    var message = "Product added to cart successfully!";
+    $scope.saveToLocalStorage();
+    $scope.showAlert(message);
+  };
 
-    // Modal Video
-    $(document).ready(function () {
-        var $videoSrc;
-        $('.btn-play').click(function () {
-            $videoSrc = $(this).data("src");
-        });
-        console.log($videoSrc);
+  $scope.total = () => {
+    return $scope.ids
+      .map((item) => item.unitPrice * item.quantity)
+      .reduce((totalPrice, quantity) => (totalPrice += quantity), 0);
+  };
 
-        $('#videoModal').on('shown.bs.modal', function (e) {
-            $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
-        })
+  $scope.showAlert = (message) => {
+    var alertBox = document.createElement("div");
+    alertBox.innerHTML = message;
+    alertBox.style.cssText =
+      "position:fixed;top:13.5%;right:13.5%;width:20%;border-radius: 10px;background-color:rgba(242, 113, 37,0.7);color:white;text-align:center;padding:20px;z-index:9999;";
+    document.body.appendChild(alertBox);
 
-        $('#videoModal').on('hide.bs.modal', function (e) {
-            $("#video").attr('src', $videoSrc);
-        })
-    });
+    setTimeout(function () {
+      document.body.removeChild(alertBox);
+    }, 1500);
+  };
 
+  $scope.saveToLocalStorage = () => {
+    var json = JSON.stringify(angular.copy($scope.ids));
+    localStorage.setItem("cart", json);
+  };
 
+  $scope.loadFromLocalStorage = () => {
+    var json = localStorage.getItem("cart");
+    $scope.ids = json ? JSON.parse(json) : [];
+  };
 
-    // Product Quantity
-    $('.quantity button').on('click', function () {
-        var button = $(this);
-        var oldValue = button.parent().parent().find('input').val();
-        if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        button.parent().parent().find('input').val(newVal);
-    });
-
-})(jQuery);
-
+  $scope.loadFromLocalStorage();
+});
