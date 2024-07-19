@@ -70,8 +70,10 @@
                                     th:each="productWithImage : ${productWithImages}">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">
-                                            <a th:href="@{/sms/shopdetails}">
-                                                <img th:src="${'/img/' + productWithImage.productImage.url}"
+                                            <a
+                                                th:href="@{/sms/shopdetails/{productId}(productId=${productWithImage.product.productId})}">
+
+                                                <img th:src="${'/site/img/' + productWithImage.productImage.url}"
                                                     class="img-fluid w-100 rounded-top" alt="">
                                             </a>
                                         </div>

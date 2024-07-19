@@ -86,4 +86,15 @@ app.controller("CartController", function ($scope, $http) {
   };
 
   $scope.loadFromLocalStorage();
+
+// ----------Xu ly dat hang
+
+  $scope.order = {};
+
+  $scope.placeOrder = () => {
+    $http.push(`${host}/orders`).then((resp) =>{
+      
+    });
+  };
+
 });
