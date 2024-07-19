@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("sms")
-public class LoginController {
-    @RequestMapping("login")
-    public String login() {
-        return "site/login";
+public class RegisterController {
+    @RequestMapping("register")
+    public String register() {
+        return "site/register";
     }
     
 }

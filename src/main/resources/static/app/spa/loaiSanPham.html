@@ -1,0 +1,162 @@
+<div>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-inline my-2 my-lg-0 mr-auto">
+                            <div class="position-relative">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                                    aria-label="Search">
+                            </div>
+                            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            <div class="ml-auto">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fas fa-file-export"></i> Xuất File
+                                </button>
+                                <a href="#!themMoiHangHoa">
+                                    <button type="button" class="btn btn-primary ml-2">
+                                        <i class="fas fa-plus"></i> Thêm mới sản phẩm
+                                    </button>
+                                </a>
+                            </div>
+                        </form>
+                        <div class="container mt-5">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="categoryList-tab" ng-click="switchTab($event, 'categoryList')" role="tab" aria-controls="categoryList" aria-selected="false">Danh sách Loại Hàng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " id="addCategory-tab" ng-click="switchTab($event, 'addCategory')" role="tab" aria-controls="addCategory" aria-selected="true">Thêm mới Loại Hàng</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade" id="addCategory" role="tabpanel"
+                                    aria-labelledby="addProduct-tab">
+                                    <div class="mt-4">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="productId">Mã loại hàng</label>
+                                                    <input type="text" class="form-control" id="productCode"
+                                                        placeholder="">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="productName">Tên loại hàng</label>
+                                                    <input type="text" class="form-control" id="productName"
+                                                        placeholder="Nhập tên loại hàng">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="productDescription">Mô tả</label>
+                                                    <input type="text" class="form-control" id="productDescription"
+                                                        placeholder="Nhập mô tả">
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <button type="button" class="btn btn-primary">
+                                                    <i class="fas fa-plus"></i> Lưu
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade show active" id="categoryList" role="tabpanel"
+                                    aria-labelledby="productList-tab">
+                                    <div class="table-responsive m-4">
+                                        <table class="table table-striped table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã loại sản phẩm</th>
+                                                    <th>Tên loại hàng</th>
+                                                    <th>Mô tả</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-toggle="collapse" data-target="#customer1"
+                                                    class="accordion-toggle">
+                                                    <td>11</td>
+                                                    <td>Vegetables</td>
+                                                    <td>Rau sạch và các loại hoa quả cung cấp vitamin và các chất dinh
+                                                        dưỡng cho cơ thể của bạn</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7" class="hiddenRow">
+                                                        <div id="customer1" class="accordion-body collapse p-3">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <h4>Thông tin chi tiết</h4>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <form>
+                                                                                <div class="form-group row">
+                                                                                    <label for="customerID"
+                                                                                        class="col-sm-2 col-form-label">Mã
+                                                                                        Loại hàng</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="customerID" value="11"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <label for="customerName"
+                                                                                        class="col-sm-2 col-form-label">Tên
+                                                                                        loại hàng</label>
+                                                                                    <div class="col-sm-4">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="customerName"
+                                                                                            value="Vegetables" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        for="productDescriptionDetail"
+                                                                                        class="col-sm-2 col-form-label">Mô
+                                                                                        tả sản phẩm</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="productDescriptionDetail"
+                                                                                            value="Rau sạch và các loại hoa quả cung cấp vitamin và các chất dinh dưỡng cho cơ thể của bạn"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-3">
+                                                                        <div class="col-md-12">
+                                                                            <button type="button"
+                                                                                class="btn btn-success">Cập
+                                                                                nhật</button>
+                                                                            <button type="button"
+                                                                                class="btn btn-danger">Xóa</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- Add more customer rows as needed -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
