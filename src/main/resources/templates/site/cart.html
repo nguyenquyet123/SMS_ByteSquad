@@ -53,7 +53,7 @@
                             <tr ng-repeat="item in productWithImgs">
                                 <th scope="row">
                                     <div class="d-flex align-items-center">
-                                        <img ng-src="{{'/img/' + item.imgUrl}}" class="img-fluid me-5 rounded-circle"
+                                        <img ng-src="{{'/site/img/' + item.imgUrl}}" class="img-fluid me-5 rounded-circle"
                                             style="width: 80px; height: 80px;" alt="">
                                     </div>
                                 </th>
@@ -61,7 +61,7 @@
                                     <p class="mb-0 mt-4">{{item.product.productName}}</p>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4">{{item.product.unitPrice}}</p>
+                                    <p class="mb-0 mt-4">{{item.product.unitPrice | number:1}}</p>
                                 </td>
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 100px;">
@@ -72,7 +72,7 @@
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 200px;">
                                         <input type="text" class="form-control form-control-sm text-center" readonly
-                                            value="{{item.product.unitPrice * item.product.quantity}} $">
+                                            value="{{item.product.unitPrice * item.product.quantity | number:1}} $">
                                     </div>
                                 </td>
                                 <td>
@@ -105,11 +105,11 @@
                         </div> -->
                             <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                                 <h5 class="mb-0 ps-4 me-4">Total</h5>
-                                <p class="mb-0 pe-4">{{total()}} $</p>
+                                <p class="mb-0 pe-4">{{total() | number:1}} $</p>
                             </div>
-                            <button
+                            <a th:href="@{/sms/checkout}"
                                 class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                type="button">Proceed Checkout</button>
+                                type="button">Proceed Checkout</a>
                         </div>
                     </div>
                 </div>
