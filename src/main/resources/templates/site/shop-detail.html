@@ -69,8 +69,8 @@
                                     <div class="rounded" style="width: 50px; height: 50px;">
                                         <a
                                             th:href="@{/sms/shopdetails/{productId}(productId=${item.product.productId})}">
-                                            <img th:src="${'/site/img/' + item.productImage.url}" class="img-fluid rounded"
-                                                alt="Image">
+                                            <img th:src="${'/site/img/' + item.productImage.url}"
+                                                class="img-fluid rounded" alt="Image">
                                         </a>
                                     </div>
                                     <div>
@@ -109,6 +109,9 @@
                                                 class="img-fluid w-100 rounded-top" alt="">
                                         </a>
                                     </div>
+                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                        style="top: 10px; left: 10px;"
+                                        th:text="${productWithImage.product.category.name}"></div>
                                     <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                         <h4 th:text="${productWithImage.product.productName}"></h4>
                                         <div class="d-flex justify-content-between flex-lg-wrap">

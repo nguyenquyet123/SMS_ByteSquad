@@ -19,8 +19,8 @@
                         <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active rounded">
-                                    <img src="/site/img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded"
-                                        alt="First slide">
+                                    <img src="/site/img/hero-img-1.png"
+                                        class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
                                     <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
                                 </div>
                                 <div class="carousel-item rounded">
@@ -87,6 +87,9 @@
                                                 class="img-fluid w-100 rounded-top" alt="">
                                         </a>
                                     </div>
+                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                        style="top: 10px; left: 10px;"
+                                        th:text="${productWithImage.product.category.name}"></div>
                                     <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                         <h4 th:text="${productWithImage.product.productName}"></h4>
                                         <div class="d-flex justify-content-between flex-lg-wrap">
@@ -152,9 +155,9 @@
                         <div class="p-4 rounded bg-light">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <a th:href="@{/sms/shopdetails}">
+                                    <a th:href="@{/sms/shopdetails/{productId}(productId=${item.product.productId})}">>
                                         <img th:src="${'/site/img/' + item.productImage.url}"
-                                            class="img-fluid w-100 rounded-top" alt="">
+                                            class="img-fluid rounded-circle w-100" alt="">
                                     </a>
                                 </div>
                                 <div class="col-6">
