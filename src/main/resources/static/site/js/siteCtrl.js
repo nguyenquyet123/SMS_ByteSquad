@@ -1,4 +1,14 @@
-app.controller("CartController", function ($scope, $http) {
+var site = angular.module("mySite", ["ngRoute"]);
+
+// site.config(function ($routeProvider, $httpProvider) {
+//   // var auth = "Basic " + btoa("user:123");
+//   $httpProvider.defaults.headers.common["Authorization"] =
+//     "Basic YWRtaW42OjY2Ng==";
+// });
+
+let host = "http://localhost:8080/api";
+
+site.controller("siteCtrl", function ($scope, $http) {
   $scope.products = [];
   $scope.product = {};
 
@@ -28,36 +38,39 @@ app.controller("CartController", function ($scope, $http) {
 
         if (existingProduct) {
           existingProduct.product.quantity += 1;
-
-          $scope.productWithImgs = $scope.productWithImgs.map((item) =>
-            item.product.productId === existingProduct.product.productId
-              ? existingProduct
-              : item
-          );
+          $scope.saveToLocalStorage();
+          var message = "Product added to cart successfully!";
+          $scope.showAlert(message);
         } else {
           $scope.product.quantity = 1;
           $scope.products.push($scope.product);
 
-          $http.get(`${host}/product-images`).then((resp) => {
-            $scope.productImages = resp.data;
+          $http
+            .get(`${host}/product-images`)
+            .then((resp) => {
+              $scope.productImages = resp.data;
 
-            let productImage = $scope.productImages.find(
-              (img) => img.product.productId === $scope.product.productId
-            );
+              let productImage = $scope.productImages.find(
+                (img) => img.product.productId === $scope.product.productId
+              );
 
-            $scope.productWithImgs.push({
-              product: $scope.product,
-              imgUrl: productImage ? productImage.url : null,
+              $scope.productWithImgs.push({
+                product: $scope.product,
+                imgUrl: productImage ? productImage.url : null,
+              });
+
+              $scope.saveToLocalStorage();
+              var message = "Product added to cart successfully!";
+              $scope.showAlert(message);
+            })
+            .catch((error) => {
+              console.error("Error fetching product images:", error);
             });
-          });
         }
       })
       .catch((error) => {
-        console.log("Error", error);
+        console.error("Error fetching product:", error);
       });
-    $scope.saveToLocalStorage();
-    var message = "Product added to cart successfully!";
-    $scope.showAlert(message);
   };
 
   $scope.remove = function (id) {
@@ -87,14 +100,13 @@ app.controller("CartController", function ($scope, $http) {
 
   $scope.loadFromLocalStorage();
 
-// ----------Xu ly dat hang
+  // ----------Xu ly dat hang
 
-  $scope.order = {};
+  // $scope.order = {};
 
-  $scope.placeOrder = () => {
-    $http.push(`${host}/orders`).then((resp) =>{
-      
-    });
-  };
+  // $scope.placeOrder = () => {
+  //   $http.push(`${host}/orders`).then((resp) =>{
 
+  //   });
+  // };
 });
