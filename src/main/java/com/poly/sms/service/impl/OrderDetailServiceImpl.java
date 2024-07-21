@@ -34,4 +34,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public void deleteById(Integer id) {
         orderDetailRepository.deleteById(id);
     }
+
+    @Override
+    public List<Object[]> findTopOrderedProducts() {
+        return orderDetailRepository.findTopOrderedProducts();
+    }
 }
