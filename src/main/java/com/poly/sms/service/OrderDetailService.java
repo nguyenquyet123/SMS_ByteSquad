@@ -14,4 +14,6 @@ public interface OrderDetailService {
     OrderDetail save(OrderDetail orderDetail);
 
     void deleteById(Integer id);
+
+    List<Object[]> findTopOrderedProducts();
 }
