@@ -22,6 +22,7 @@ app.config(function ($routeProvider) {
     })
     .when("/danhmuc", {
       templateUrl: "/app/spa/danhmuc.html",
+      controller: "danhMucCtrl"
     })
     .when("/themMoiHangHoa", {
       templateUrl: "/app/spa/themMoiHangHoa.html",
@@ -96,8 +97,8 @@ app.config(function ($routeProvider) {
       redirectTo: "/",
     });
 
-  $httpProvider.defaults.headers.common["Authorization"] =
-    "Basic Y3VzdG9tZXI6MTIz";
+  // $httpProvider.defaults.headers.common["Authorization"] =
+  //   "Basic Y3VzdG9tZXI6MTIz";
 });
 
 let host = "http://localhost:8080/api";
