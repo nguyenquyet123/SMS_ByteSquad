@@ -20355,7 +20355,6 @@ select.form-control, .dataTables_wrapper select {
   padding: .4375rem .75rem;
   border: 0;
   outline: 1px solid #f3f3f3;
-  color: #c9c8c8;
 }
 
 select.form-control:focus, .dataTables_wrapper select:focus {
@@ -20865,9 +20864,11 @@ dl li {
 }
 
 .table td img {
-  width: 36px;
+  /* width: 36px;
   height: 36px;
-  border-radius: 100%;
+  border-radius: 100%; */
+  margin-top: 20%;
+  border-radius: 25%;
 }
 
 .table td .badge {
