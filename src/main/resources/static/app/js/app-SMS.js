@@ -98,8 +98,8 @@ app.config(function ($routeProvider, $httpProvider) {
       redirectTo: "/",
     });
 
-  // $httpProvider.defaults.headers.common["Authorization"] =
-  //   "Basic Y3VzdG9tZXI6MTIz";
+  $httpProvider.defaults.headers.common["Authorization"] =
+    "Basic Y3VzdG9tZXI6MTIz";
 });
 
 let host = "http://localhost:8080/api";
