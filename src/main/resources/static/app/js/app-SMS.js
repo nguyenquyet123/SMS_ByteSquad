@@ -26,6 +26,7 @@ app.config(function ($routeProvider) {
     })
     .when("/themMoiHangHoa", {
       templateUrl: "/app/spa/themMoiHangHoa.html",
+      controller: "danhMucCtrl"
     })
     .when("/loaiSanPham", {
       templateUrl: "/app/spa/loaiSanPham.html",

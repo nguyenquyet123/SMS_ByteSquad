@@ -33,20 +33,12 @@ public class CategoryController {
 
     @PostMapping
     public Category createCategory(@RequestBody Category category) {
-        return categoryService.save(category);
+        return categoryService.update(category);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable Integer id, @RequestBody Category categoryDetails) {
-        Optional<Category> category = categoryService.findById(id);
-        if (category.isPresent()) {
-            Category updatedCategory = category.get();
-            updatedCategory.setName(categoryDetails.getName());
-            updatedCategory.setDescription(categoryDetails.getDescription());
-            return ResponseEntity.ok(categoryService.save(updatedCategory));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public Category updateCategory(@PathVariable Integer id, @RequestBody Category categoryDetails) {
+        return categoryService.update(categoryDetails);
     }
 
     @DeleteMapping("/{id}")

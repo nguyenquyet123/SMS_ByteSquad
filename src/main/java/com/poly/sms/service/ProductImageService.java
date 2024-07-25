@@ -9,6 +9,8 @@ public interface ProductImageService {
 
     List<ProductImage> findAll();
 
+    List<ProductImage> findProImgByPro(Integer id);
+
     Optional<ProductImage> findById(Integer id);
 
     ProductImage save(ProductImage productImage);

@@ -22,14 +22,20 @@ public class ProductImageController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductImage> getProductImageById(@PathVariable Integer id) {
-        Optional<ProductImage> productImage = productImageService.findById(id);
-        if (productImage.isPresent()) {
-            return ResponseEntity.ok(productImage.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public List<ProductImage> getProductImagesBypro(@PathVariable Integer id) {
+        return productImageService.findProImgByPro(id);
     }
+
+
+    // @GetMapping("/{id}")
+    // public ResponseEntity<ProductImage> getProductImageById(@PathVariable Integer id) {
+    //     Optional<ProductImage> productImage = productImageService.findById(id);
+    //     if (productImage.isPresent()) {
+    //         return ResponseEntity.ok(productImage.get());
+    //     } else {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    // }
 
     @PostMapping
     public ProductImage createProductImage(@RequestBody ProductImage productImage) {

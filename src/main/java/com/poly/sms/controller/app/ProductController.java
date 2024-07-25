@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -33,30 +34,12 @@ public class ProductController {
 
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
-        return productService.save(product);
+        return productService.update(product);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product productDetails) {
-        Optional<Product> product = productService.findById(id);
-        if (product.isPresent()) {
-            Product updatedProduct = product.get();
-            updatedProduct.setCategory(productDetails.getCategory());
-            updatedProduct.setSupplier(productDetails.getSupplier());
-            updatedProduct.setProductName(productDetails.getProductName());
-            updatedProduct.setQuantity(productDetails.getQuantity());
-            updatedProduct.setUnitPrice(productDetails.getUnitPrice());
-            if(productDetails.getQuantity() <= 10){
-                updatedProduct.setProductStatus(0);
-            }else{
-                updatedProduct.setProductStatus(1);
-            }
-            updatedProduct.setDiscount(productDetails.getDiscount());
-            updatedProduct.setDescription(productDetails.getDescription());
-            return ResponseEntity.ok(productService.save(updatedProduct));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PutMapping("{id}")
+    public Product updateProduct(@PathVariable("id") Integer id,@RequestBody Product product) {
+        return productService.update(product);
     }
 
     @DeleteMapping("/{id}")
