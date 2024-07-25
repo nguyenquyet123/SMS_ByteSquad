@@ -20,6 +20,10 @@ app.config(function ($routeProvider, $httpProvider) {
     .when("/thietLapVaiTro", {
       templateUrl: "/app/spa/thietLapVaiTro.html",
     })
+    .when
+    .when("/f", {
+      templateUrl: "/app/spa/thietLapVaiTro.html",
+    })
     .when("/danhmuc", {
       templateUrl: "/app/spa/danhmuc.html",
       controller: "danhMucCtrl"
@@ -37,6 +41,7 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/themMoiKiemKho", {
       templateUrl: "/app/spa/themMoiKiemKho.html",
+      controller: "kiemKhoCtrl"
     })
     .when("/dathang", {
       templateUrl: "/app/spa/dathang.html",

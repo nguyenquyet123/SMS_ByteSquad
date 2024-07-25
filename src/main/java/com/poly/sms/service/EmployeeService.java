@@ -16,4 +16,6 @@ public interface EmployeeService {
     Employee save(Employee employee);
 
     void deleteById(String username);
+
+    Employee findByEmail(String email);
 }
