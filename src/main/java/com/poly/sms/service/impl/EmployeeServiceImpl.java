@@ -34,4 +34,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteById(String username) {
         employeeRepository.deleteById(username);
     }
+
+    @Override
+    public Employee findByUsername(String username) {
+        return employeeRepository.findByUsername(username);
+    }
+
 }

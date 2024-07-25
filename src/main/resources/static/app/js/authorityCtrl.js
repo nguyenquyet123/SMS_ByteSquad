@@ -15,7 +15,7 @@ app.controller("authorityCtrl", function ($scope, $http) {
   $scope.update = (username, role) => {
     var index = $scope.index_of(username, role);
     if (index >= 0) {
-      var id = $scope.db.authorities[index].authorityId;
+      var id = $scope.db.authorities[index].id;
       $http.delete(`${host}/authorities/${id}`).then((resp) => {
         $scope.db.authorities.splice(index, 1);
       });

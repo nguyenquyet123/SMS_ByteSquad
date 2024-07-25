@@ -1,6 +1,6 @@
 var app = angular.module("app-SMS", ["ngRoute"]);
 
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, $httpProvider) {
   $routeProvider
     .when("/", {
       templateUrl: "/app/spa/home.html",

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface EmployeeRoleService {
 
+    List<EmployeeRole> findByEMploy(String username);
+
     List<EmployeeRole> findAll();
 
     Optional<EmployeeRole> findById(Integer id);

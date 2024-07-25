@@ -1,13 +1,72 @@
-<!DOCTYPE html>
+<!-- // Employee employee = employeeService.findByUsername(username);
+// String password = employee.getPassword();
+
+// String[] roles = employee.getEmployeeRoles().stream()
+// .map(au -> au.getRole().getRoleId())
+// .collect(Collectors.toList()).toArray(new String[0]);
+
+// return User.builder().username(username)
+// .password(password)
+// .roles(roles)
+// .build();
+
+        try {
+            Employee employee = employeeService.findByUsername(username);
+            String password = employee.getPassword();
+
+            String[] roles = employee.getEmployeeRoles().stream()
+                    .map(au -> au.getRole().getRoleId())
+                    .collect(Collectors.toList()).toArray(new String[0]);
+
+            return User.builder().username(username)
+                    .password(password)
+                    .roles(roles)
+                    .build();
+
+        } catch (Exception e) {
+            throw new UsernameNotFoundException(username + " NOT FOUND", e);
+        }
+// } -->
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     th:replace="~{/site/layouts/main :: dynamic(~{::main})}">
 
 <head></head>
 
 <body>
-<main>
-    
-</main>
+    <main>
+
+    </main>
 </body>
 
 </html>
+
+<th:block sec:authorize="isAuthenticated()">
+    <li class="nav-item">
+        <a class="nav-link" href="">
+            <b>Welcome, <span sec:authentication="'[' + name + ']'"></span></b>
+        </a>
+    </li>
+    <div sec:authorize="hasAnyRole('STAF', 'DIRE')">
+        <li class="nav-item">
+            <a class="nav-link " th:href="@{/admin/home/index}"> <b>Admin Page</b>
+            </a>
+        </li>
+    </div>
+    <li class="nav-item"><a class="nav-link" th:href="@{/security/logout}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <b>Sign Out</b>
+        </a></li>
+    <li class="nav-item"><a class="nav-link" th:href="@{/order/list}">
+            <i class="bi bi-border-width"></i></i>
+            <b>Your Order</b>
+        </a></li>
+</th:block> -->
