@@ -41,7 +41,7 @@
                         <a th:href="@{/sms/contact}" class="nav-item nav-link">Contact</a>
                         <!-- <a th:href="@{/app}" class="nav-item nav-link">Manage</a> -->
                         <th:block sec:authorize="isAuthenticated()">
-                            <a th:href="@{/app}" class="nav-item nav-link"
+                            <a th:href="@{/sms/app}" class="nav-item nav-link"
                                 sec:authorize="hasRole('ADMIN')">Manage</a>
                         </th:block>
                     </div>
