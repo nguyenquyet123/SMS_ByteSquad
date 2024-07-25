@@ -11,6 +11,8 @@ public interface EmployeeService {
 
     Optional<Employee> findById(String username);
 
+    Employee findByUsername(String username);
+
     Employee save(Employee employee);
 
     void deleteById(String username);

@@ -1,6 +1,8 @@
 package com.poly.sms.service.impl;
 
+import com.poly.sms.entity.Employee;
 import com.poly.sms.entity.EmployeeRole;
+import com.poly.sms.repository.EmployeeRepository;
 import com.poly.sms.repository.EmployeeRoleRepository;
 import com.poly.sms.service.EmployeeRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class EmployeeRoleServiceImpl implements EmployeeRoleService {
 
     @Autowired
     private EmployeeRoleRepository employeeRoleRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Override
     public List<EmployeeRole> findAll() {
@@ -33,5 +38,11 @@ public class EmployeeRoleServiceImpl implements EmployeeRoleService {
     @Override
     public void deleteById(Integer id) {
         employeeRoleRepository.deleteById(id);
+    }
+
+    @Override
+    public List<EmployeeRole> findByEMploy(String username) {
+        Employee employee = employeeRepository.findByUsername(username);
+        return employeeRoleRepository.findByEmployee(employee);
     }
 }
