@@ -1,6 +1,7 @@
 package com.poly.sms.controller.app;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @RestController
 @RequestMapping("/api/authorities")
@@ -38,6 +40,12 @@ public class EmployeeRoleController {
         data.put("accounts", employeeService.findAll());
         return data;
     }
+
+    @GetMapping("{username}")
+    public List<EmployeeRole> getMethodName(@PathVariable String username) {
+        return employeeRoleService.findByEMploy(username);
+    }
+    
 
     @PostMapping
     public EmployeeRole create(@RequestBody EmployeeRole employeeRole) {

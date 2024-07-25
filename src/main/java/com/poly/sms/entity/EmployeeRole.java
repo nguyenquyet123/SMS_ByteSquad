@@ -1,6 +1,7 @@
 package com.poly.sms.entity;
 
-import jakarta.persistence.Column;
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,26 +11,20 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "Employee_Roles")
-public class EmployeeRole {
+public class EmployeeRole implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id")
     private Role role;
 
     @ManyToOne
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "username")
     private Employee employee;
 }
