@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("sms")
 public class AppController {
-    @RequestMapping("/app")
+    @RequestMapping("app")
     public String app() {
         return "app/index";
     }

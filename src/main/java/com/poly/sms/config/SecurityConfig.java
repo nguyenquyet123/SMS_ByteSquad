@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -19,38 +18,39 @@ public class SecurityConfig {
     @Autowired
     private AccountDetailService accountDetailService;
 
-    private final String[] PUBLIC_ENDPOINTS = { "/site/img/**", "/site/css/**", "/app/images/**", "/app/css/**",
-            "/app/vendors/**", "/app/spa/**", "/api/**", "/sms/**", };
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        // .csrf(AbstractHttpConfigurer::disable)
-        // .httpBasic(Customizer.withDefaults())
 
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(
                 auth -> auth
-                        .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
-                        .anyRequest().authenticated());
+                        .requestMatchers("/sms/checkout").authenticated()
+                        .requestMatchers("/sms/app").hasAnyRole("ADMIN", "MANAGE")
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll());
 
-        // http.formLogin(login -> {
-        // login
-        // .loginPage("/shop/login")
-        // .failureUrl("/shop/fail")
-        // .successHandler(new AuthenticationSuccessHandler(session));
-        // });
+        http.exceptionHandling(ex -> {
+            ex.accessDeniedPage("/access/denied");
+        });
 
-        // http.logout(logout -> {
-        // logout
-        // .logoutUrl("/shop/logout")
-        // .logoutSuccessUrl("/shop/login")
-        // .invalidateHttpSession(true)
-        // .deleteCookies("JSESSIONID");
-        // });
+        http.formLogin(login -> {
+            login
+                    .loginPage("/sms/login")
+                    .loginProcessingUrl("/login")
+                    .defaultSuccessUrl("/sms/home", false)
+                    .failureUrl("/login/error")
+                    .usernameParameter("username")
+                    .passwordParameter("password");
+        });
 
-        http.httpBasic(Customizer.withDefaults());
+        http.logout(logout -> {
+            logout
+                    .logoutUrl("/sms/logout")
+                    .logoutSuccessUrl("/logout/success")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID");
+        });
 
         return http.build();
     }
