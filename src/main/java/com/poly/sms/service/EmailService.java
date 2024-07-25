@@ -15,5 +15,7 @@ public interface EmailService {
   
 
     void sendEmail(Email email);
+    void sendPasswordWithCredentials(String to, String password);
+    
 }
 
