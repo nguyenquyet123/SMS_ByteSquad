@@ -1,41 +1,50 @@
-// package com.poly.sms.config;
+package com.poly.sms.config;
 
-// import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.security.core.userdetails.User;
-// import org.springframework.security.core.userdetails.UserDetails;
-// import org.springframework.security.core.userdetails.UserDetailsService;
-// import org.springframework.security.core.userdetails.UsernameNotFoundException;
-// import org.springframework.stereotype.Service;
+import com.poly.sms.entity.Employee;
+import com.poly.sms.service.EmployeeService;
 
-// import com.poly.sms.entity.Employee;
-// import com.poly.sms.service.EmployeeService;
+import jakarta.transaction.Transactional;
 
-// @Service
-// public class AccountDetailService implements UserDetailsService {
+@Service
+@Component
+public class AccountDetailService implements UserDetailsService {
 
-//     @Autowired
-//     EmployeeService employeeService;
+    @Autowired
+    EmployeeService employeeService;
 
-//     @Override
-//     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//         try {
+    @Override
+    @Transactional //note :(
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-//             Employee account = employeeService.findById(username).get();
-//             String password = account.getPassword();
-//             String[] roles = account.getAuthorities().stream()
-//                     .map(au -> au.getRole().getRoleId())
-//                     .collect(Collectors.toList()).toArray(new String[0]);
+        try {
+            Employee employee = employeeService.findByUsername(username);
+            if (employee == null) {
+                throw new UsernameNotFoundException(username + " NOT FOUND");
+            }
 
-//             return User.builder().username(username)
-//                     .password(password)
-//                     .roles(roles)
-//                     .build();
-//         } catch (Exception e) {
-//             throw new UsernameNotFoundException(username + " NOT FOUND", e);
-//         }
+            String password = employee.getPassword();
+            String[] roles = employee.getEmployeeRoles()
+                    .stream()
+                    .map(au -> au.getRole().getRoleId())
+                    .toArray(String[]::new);
 
-//     }
+            return User.builder()
+                    .username(username)
+                    .password(password)
+                    .roles(roles)
+                    .build();
 
-// }
+        } catch (Exception e) {
+            throw new UsernameNotFoundException(username + " NOT FOUND", e);
+        }
+
+}
+}
