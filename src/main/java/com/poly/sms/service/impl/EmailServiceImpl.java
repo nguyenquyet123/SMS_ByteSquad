@@ -49,5 +49,15 @@ public class EmailServiceImpl implements EmailService{
             e.printStackTrace();
             throw new RuntimeException("Error sending email: " + e.getMessage());
         }
+
+
+    }
+    @Override
+    public void sendPasswordWithCredentials(String to, String password) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject("Mật khẩu của bạn");
+        message.setText("Mật khẩu của bạn là: " + password);
+        mailSender.send(message);
     }
     }

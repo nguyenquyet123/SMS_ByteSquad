@@ -1,9 +1,9 @@
 package com.poly.sms.service;
 
-import com.poly.sms.entity.Customer;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.poly.sms.entity.Customer;
 
 public interface CustomerService {
 
@@ -14,4 +14,7 @@ public interface CustomerService {
     Customer save(Customer customer);
 
     void deleteById(Integer id);
+
+    
+    
 }
