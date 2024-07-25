@@ -63,3 +63,22 @@
     height: 100%;
     object-fit: cover;
 }
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.file-input-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.btn-file-input {
+    display: inline-block;
+    cursor: pointer;
+}

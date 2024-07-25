@@ -1,20 +1,86 @@
 app.controller("danhMucCtrl", function ($scope, $http) {
-    $scope.form ={};
-    //Update
-    $scope.update = function () {
-        var item = angular.copy($scope.form);
-        $http.put(`/api/products/${item.id}`, item).then(reps => {
-            var index = $scope.products.findIndex(p => p.productId == item.productId);
-            $scope.products[index] = item;
-            alert("Cap nhat thanh cong");
+    $scope.form = {};
+    $scope.products = [];
+
+    //reset
+    $scope.reset = () => {
+        $scope.form = {};
+    }
+    //Upload Hinh
+    $scope.imageChanged = function (files) {
+        var data = new FormData();
+        data.append('file', files[0]);
+
+        $http.post('/rest/upload/img', data, {
+            transformStream: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).then(function (res) {
+            if ($scope.form.images != null) {
+                $scope.form.images.push(res.data.name.trim());
+            } else {
+                $scope.form.images = res.data.name.trim();
+            }
+            alert("Chon Anh Thanh Cong");
+        }).catch(function (error) {
+            console.log("Error", error);
+        });
+    };
+    $scope.saveProImg = function () {
+        var img;
+        var product;
+        if (Array.isArray($scope.form.images)) {
+            img = $scope.form.images.at(-1);
+            product = $scope.form;
+        } else {
+            img = $scope.form.images;
+            product = $scope.product;
+        };
+        
+        $scope.proImg = {
+            url: img,
+            product: product
+        };
+        $http.post(`${host}/product-images`, $scope.proImg).then(reps => {
+            console.log("SaveProImg: ",reps.data);
         }).catch(error => {
-            alert("Cap nhat that bai");
+            console.log(error);
+        })
+    }
+    //Create
+    $scope.create = function () {
+        var item = angular.copy($scope.form);
+        item.productStatus = 1;
+        $http.post(`${host}/products`, item).then(reps => {
+            $scope.product = reps.data;
+            console.log("CreatePro",reps.data);
+            $scope.saveProImg();
+            alert("Them moi thanh cong");
+            $scope.reset();
+        }).catch(error => {
+            alert("Them moi that bai");
             console.log("Error", error);
         })
     }
+    //Update
+    $scope.update = function () {
+        var item = angular.copy($scope.form);
+        console.log(item)
+        $scope.saveProImg();
+        $http.put(`${host}/products/${item.productId}`, item).then(reps => {
+            var index = $scope.page.findIndex(p => p.productId == item.productId);
+            $scope.page[index] = item;
+            alert("Cap nhat thanh cong");
+            console.log("Update : ",reps.data)
+        }).catch(error => {
+            alert("Cap nhat that bai");
+            console.log("Error", error);
+        });
+    }
+
     //Hiển thị table
     $scope.selectedRow = null;
     $scope.showDetails = function (row) {
+        console.log(row)
         $scope.form = angular.copy(row);
         if ($scope.selectedRow === row) {
             $scope.selectedRow = null;
@@ -73,10 +139,11 @@ app.controller("danhMucCtrl", function ($scope, $http) {
             }).catch((error) => {
                 console.log("Error", error);
             });
-
+        //load categories
         $http.get(`${host}/categories`).then((resp) => {
             $scope.selectBoxCates = resp.data;
         });
+        //load categories
         $http.get(`${host}/suppliers`).then((resp) => {
             $scope.selectBoxSuppliers = resp.data;
         })

@@ -15,6 +15,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findTop6ByOrderByDiscountDesc();
 
+    Product findByProductId(Integer productId);
+
     @Query("SELECT p FROM Product p WHERE p.category.categoryId = ?1")
     Page<Product> findProductsByCategoryId(int keywords, Pageable pageable);
 
@@ -26,7 +28,4 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT p FROM Product p WHERE p.productName LIKE %?1%")
     Page<Product> findByProductNameContaining(String productName, Pageable pageable);
-
-    
-
 }
