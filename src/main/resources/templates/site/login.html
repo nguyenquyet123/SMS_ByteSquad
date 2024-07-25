@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <!-- Required meta tags -->
@@ -45,7 +45,7 @@
                       Keep me signed in
                     </label>
                   </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
+                  <a th:href="@{/sms/forgot}" class="auth-link text-black">Forgot password?</a>
                 </div>
                 <div class="mb-2">
                   <button type="button" class="btn btn-block btn-facebook auth-form-btn">

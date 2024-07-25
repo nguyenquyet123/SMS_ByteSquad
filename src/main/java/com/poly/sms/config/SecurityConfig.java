@@ -35,20 +35,20 @@
 //                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
 //                         .anyRequest().authenticated());
 
-//         // http.formLogin(login -> {
-//         // login
-//         // .loginPage("/shop/login")
-//         // .failureUrl("/shop/fail")
-//         // .successHandler(new AuthenticationSuccessHandler(session));
-//         // });
+//         http.formLogin(login -> {
+//         login
+//         .loginPage("/shop/login")
+//         .failureUrl("/shop/fail")
+//         .successHandler(new AuthenticationSuccessHandler());
+//         });
 
-//         // http.logout(logout -> {
-//         // logout
-//         // .logoutUrl("/shop/logout")
-//         // .logoutSuccessUrl("/shop/login")
-//         // .invalidateHttpSession(true)
-//         // .deleteCookies("JSESSIONID");
-//         // });
+//         http.logout(logout -> {
+//         logout
+//         .logoutUrl("/shop/logout")
+//         .logoutSuccessUrl("/shop/login")
+//         .invalidateHttpSession(true)
+//         .deleteCookies("JSESSIONID");
+//         });
 
 //         http.httpBasic(Customizer.withDefaults());
 
