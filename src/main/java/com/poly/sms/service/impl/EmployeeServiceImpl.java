@@ -1,13 +1,14 @@
 package com.poly.sms.service.impl;
 
-import com.poly.sms.entity.Employee;
-import com.poly.sms.repository.EmployeeRepository;
-import com.poly.sms.service.EmployeeService;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.poly.sms.entity.Employee;
+import com.poly.sms.repository.EmployeeRepository;
+import com.poly.sms.service.EmployeeService;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -38,6 +39,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findByUsername(String username) {
         return employeeRepository.findByUsername(username);
+    }
+
+    @Override
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
     }
 
 }
