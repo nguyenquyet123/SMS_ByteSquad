@@ -12,3 +12,4 @@ spring:
             enable: true
           timeout: 5000
           connectiontimeout: 5000
+
