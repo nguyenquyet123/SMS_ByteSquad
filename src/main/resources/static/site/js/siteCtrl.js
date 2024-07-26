@@ -2,7 +2,7 @@ var site = angular.module("mySite", ["ngRoute"]);
 
 site.config(function ($httpProvider) {
   $httpProvider.defaults.headers.common["Authorization"] =
-    "Basic Y3VzdG9tZXI6MTIz";
+    "Basic YW5oOjEyMzQ1Ng==";
 });
 // "Basic bWFuYWdlOjEyMw==";
 
@@ -100,13 +100,11 @@ site.controller("siteCtrl", function ($scope, $http) {
 
   $scope.loadFromLocalStorage();
 
-  // ----------Xu ly dat hang
+  $scope.order = {};
 
-  // $scope.order = {};
+  $scope.placeOrder = () => {
+    $http.push(`${host}/orders`).then((resp) =>{
 
-  // $scope.placeOrder = () => {
-  //   $http.push(`${host}/orders`).then((resp) =>{
-
-  //   });
-  // };
+    });
+  };
 });

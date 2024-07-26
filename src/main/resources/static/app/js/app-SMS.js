@@ -20,7 +20,6 @@ app.config(function ($routeProvider, $httpProvider) {
     .when("/thietLapVaiTro", {
       templateUrl: "/app/spa/thietLapVaiTro.html",
     })
-    .when
     .when("/f", {
       templateUrl: "/app/spa/thietLapVaiTro.html",
     })
@@ -104,7 +103,7 @@ app.config(function ($routeProvider, $httpProvider) {
     });
 
   $httpProvider.defaults.headers.common["Authorization"] =
-    "Basic Y3VzdG9tZXI6MTIz";
+    "Basic YW5oOjEyMzQ1Ng==";
 });
 
 let host = "http://localhost:8080/api";
