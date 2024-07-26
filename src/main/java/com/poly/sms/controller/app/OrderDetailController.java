@@ -36,8 +36,17 @@ public class OrderDetailController {
         return orderDetailService.save(orderDetail);
     }
 
+    @PostMapping("/bulk")
+    public List<OrderDetail> createOrderDetails(@RequestBody List<OrderDetail> orderDetails) {
+        for (OrderDetail orderDetail : orderDetails) {
+            orderDetailService.save(orderDetail);
+        }
+        return orderDetails;
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<OrderDetail> updateOrderDetail(@PathVariable Integer id, @RequestBody OrderDetail orderDetailDetails) {
+    public ResponseEntity<OrderDetail> updateOrderDetail(@PathVariable Integer id,
+            @RequestBody OrderDetail orderDetailDetails) {
         Optional<OrderDetail> orderDetail = orderDetailService.findById(id);
         if (orderDetail.isPresent()) {
             OrderDetail updatedOrderDetail = orderDetail.get();

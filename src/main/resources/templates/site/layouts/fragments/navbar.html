@@ -57,12 +57,15 @@
                             <a href="#" class="nav-link" data-bs-toggle="dropdown">
                                 <i class="fas fa-user fa-2x"></i>
                                 <th:block sec:authorize="isAuthenticated()">
-                                    <span th:text="'[' + ${#authentication.name} + ']'"></span>
+                                    <span id="username" th:text="'[' + ${#authentication.name} + ']'"></span>
                                 </th:block>
                             </a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                 <a th:href="@{/sms/login}" class="dropdown-item">Login</a>
                                 <a th:href="@{/sms/register}" class="dropdown-item">Register</a>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <a th:href="@{/sms/orderhistory}" class="dropdown-item">Order history</a>
+                                </th:block>
                                 <a th:href="@{/sms/logout}" class="dropdown-item">Logout</a>
                             </div>
                         </div>

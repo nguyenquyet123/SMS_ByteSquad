@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("sms")
-public class AppController {
-
-    @RequestMapping("app")
-    public String app() {
-        return "app/index";
+public class OrderHistoryController {
+    @RequestMapping("orderhistory")
+    public String orderhistory() {
+        return "site/orderhistory";
     }
+
 }
