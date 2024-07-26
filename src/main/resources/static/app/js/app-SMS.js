@@ -20,17 +20,16 @@ app.config(function ($routeProvider, $httpProvider) {
     .when("/thietLapVaiTro", {
       templateUrl: "/app/spa/thietLapVaiTro.html",
     })
-    .when
     .when("/f", {
       templateUrl: "/app/spa/thietLapVaiTro.html",
     })
     .when("/danhmuc", {
       templateUrl: "/app/spa/danhmuc.html",
-      controller: "danhMucCtrl"
+      controller: "danhMucCtrl",
     })
     .when("/themMoiHangHoa", {
       templateUrl: "/app/spa/themMoiHangHoa.html",
-      controller: "danhMucCtrl"
+      controller: "danhMucCtrl",
     })
     .when("/loaiSanPham", {
       templateUrl: "/app/spa/loaiSanPham.html",
@@ -41,7 +40,7 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/themMoiKiemKho", {
       templateUrl: "/app/spa/themMoiKiemKho.html",
-      controller: "kiemKhoCtrl"
+      controller: "kiemKhoCtrl",
     })
     .when("/dathang", {
       templateUrl: "/app/spa/dathang.html",
