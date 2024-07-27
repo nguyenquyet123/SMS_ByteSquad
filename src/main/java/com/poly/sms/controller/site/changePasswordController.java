@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 package com.poly.sms.controller.site;
 
@@ -15,43 +11,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.sms.entity.Employee;
-import com.poly.sms.service.EmailService;
 import com.poly.sms.service.EmployeeService;
 
-/**
- *
- * @author hoang
- */
-
- 
 @Controller
 @RequestMapping("sms")
 public class changePasswordController {
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    EmployeeService employeeService; // Repository để tìm kiếm người dùng
+    EmployeeService employeeService;
 
-    @Autowired
-    private EmailService emailService; // Dịch vụ gửi email
-
-
-
-
-
-     @GetMapping("/reset-password")
+    @GetMapping("/reset-password")
     public String showResetPasswordForm(Model model) {
         model.addAttribute("employee", new Employee());
         return "site/changePassword";
     }
 
     @PostMapping("/reset-password")
-    public String resetPassword(@RequestParam String username, 
-    @RequestParam String currentPassword, 
-    @RequestParam String newPassword, 
-    Model model) {
+    public String resetPassword(@RequestParam String username,
+            @RequestParam String currentPassword,
+            @RequestParam String newPassword,
+            Model model) {
         Employee employee = employeeService.findByUsername(username);
         if (employee == null) {
             model.addAttribute("message", "Tên người dùng không tồn tại.");
@@ -63,7 +45,8 @@ public class changePasswordController {
             return "site/changePassword";
         }
 
-        employee.setPassword(passwordEncoder.encode(newPassword)); // Trong thực tế, bạn nên mã hóa mật khẩu trước khi lưu
+        employee.setPassword(passwordEncoder.encode(newPassword)); // Trong thực tế, bạn nên mã hóa mật khẩu trước khi
+                                                                   // lưu
         employeeService.save(employee);
 
         model.addAttribute("message", "Mật khẩu đã được thay đổi thành công.");
