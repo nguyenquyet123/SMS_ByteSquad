@@ -13,29 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.poly.sms.entity.Employee;
 import com.poly.sms.service.EmployeeService;
 
-
-
-
 @Controller
 @RequestMapping("sms")
 public class RegisterController {
-
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("employee", new Employee());
         return "site/register";
     }
-    
+
     @Autowired
     private EmployeeService employeeService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-       @PostMapping("register")
+    @PostMapping("register")
     public String registerEmployee(@ModelAttribute Employee employee, BindingResult result, Model model) {
-       
+
         String encodedPassword = passwordEncoder.encode(employee.getPassword());
         employee.setPassword(encodedPassword);
         // Bạn có thể thực hiện mã hóa mật khẩu ở đây trước khi lưu
@@ -44,4 +40,3 @@ public class RegisterController {
         return "site/login";
     }
 }
-    
