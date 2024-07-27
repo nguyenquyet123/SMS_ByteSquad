@@ -7,9 +7,11 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/thietLapChiNhanh", {
       templateUrl: "/app/spa/thietLapChiNhanh.html",
+      controller : "QLChiNhanhCtrl"
     })
     .when("/quanLyChiNhanh", {
       templateUrl: "/app/spa/quanLyChiNhanh.html",
+      controller : "QLChiNhanhCtrl"
     })
     .when("/quanLyNguoiDung", {
       templateUrl: "/app/spa/quanLyNguoiDung.html",
@@ -20,7 +22,6 @@ app.config(function ($routeProvider, $httpProvider) {
     .when("/thietLapVaiTro", {
       templateUrl: "/app/spa/thietLapVaiTro.html",
     })
-    .when
     .when("/f", {
       templateUrl: "/app/spa/thietLapVaiTro.html",
     })
@@ -104,7 +105,7 @@ app.config(function ($routeProvider, $httpProvider) {
     });
 
   $httpProvider.defaults.headers.common["Authorization"] =
-    "Basic Y3VzdG9tZXI6MTIz";
+    "Basic dGVzdE1hbmFnZXI6MTIz";
 });
 
 let host = "http://localhost:8080/api";

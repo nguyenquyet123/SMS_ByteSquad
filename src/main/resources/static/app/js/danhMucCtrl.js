@@ -1,5 +1,7 @@
 app.controller("danhMucCtrl", function ($scope, $http) {
     $scope.form = {};
+    $scope.items = [];//dùng để lưu tạm sau khi load
+   //sử dụng để hiển thị trang và tìm kiếm
     $scope.products = [];
 
     //reset
@@ -35,13 +37,13 @@ app.controller("danhMucCtrl", function ($scope, $http) {
             img = $scope.form.images;
             product = $scope.product;
         };
-        
+
         $scope.proImg = {
             url: img,
             product: product
         };
         $http.post(`${host}/product-images`, $scope.proImg).then(reps => {
-            console.log("SaveProImg: ",reps.data);
+            console.log("SaveProImg: ", reps.data);
         }).catch(error => {
             console.log(error);
         })
@@ -52,7 +54,7 @@ app.controller("danhMucCtrl", function ($scope, $http) {
         item.productStatus = 1;
         $http.post(`${host}/products`, item).then(reps => {
             $scope.product = reps.data;
-            console.log("CreatePro",reps.data);
+            console.log("CreatePro", reps.data);
             $scope.saveProImg();
             alert("Them moi thanh cong");
             $scope.reset();
@@ -67,10 +69,11 @@ app.controller("danhMucCtrl", function ($scope, $http) {
         console.log(item)
         $scope.saveProImg();
         $http.put(`${host}/products/${item.productId}`, item).then(reps => {
-            var index = $scope.page.findIndex(p => p.productId == item.productId);
-            $scope.page[index] = item;
+            var index = $scope.items.findIndex(p => p.productId == item.productId);
+            $scope.items[index] = item;
+            
             alert("Cap nhat thanh cong");
-            console.log("Update : ",reps.data)
+            console.log("Update : ", $scope.items[index]);
         }).catch(error => {
             alert("Cap nhat that bai");
             console.log("Error", error);
@@ -90,28 +93,55 @@ app.controller("danhMucCtrl", function ($scope, $http) {
     };
     //End
 
-    //Hiển Thị page, phân trang
-    $scope.currentPage = 1;
-    $scope.itemsPerPage = 8;
-    $scope.totalItems;
-    $scope.setPage = (pageNo) => {
-        $scope.currentPage = pageNo;
-        $scope.pageChanged();
-        $scope.message = "";
+    //Hiển Thị page, phân trang , Tìm kiếm 
+    $scope.searchKeyword = '';
+    //filteredItems sử dụng để tìm kiếm,đổ tất cả lên trang hoặc theo key search
+    console.log("b", $scope.items)
+
+    $scope.filterItems = function () {
+        console.log("a", $scope.filteredItems)
+        console.log("b", $scope.items)
+        $scope.filteredItems = $scope.items.filter(function (item) {
+            //Các trường của list số + .toString(),chữ + toLowerCase()
+            return item.productId.toString().includes($scope.searchKeyword) ||
+                item.productName.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
+                item.unitPrice.toString().includes($scope.searchKeyword) ||
+                item.quantity.toString().includes($scope.searchKeyword) ||
+                item.category.name.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
+                item.supplier.companyName.toLowerCase().includes($scope.searchKeyword.toLowerCase());
+        });
+        $scope.pager.first();
     };
 
-    $scope.pageChanged = () => {
-        var begin = ($scope.currentPage - 1) * $scope.itemsPerPage;
-        var end = begin + $scope.itemsPerPage;
-        if ($scope.totalItems % 2 !== 0) {
-            if ($scope.totalItems < end) {
-                var begin = ($scope.currentPage - 1) * $scope.itemsPerPage - 1;
+    $scope.pager = {
+        page: 0,
+        size: 8,
+        // dùng để duyệt mảng và đổ lên client
+        get items() {
+            var start = this.page * this.size;
+            return $scope.filteredItems.slice(start, start + this.size);
+        },
+        get count() {
+            return Math.ceil(1.0 * $scope.filteredItems.length / this.size);
+        },
+        first() {
+            this.page = 0;
+        },
+        pre() {
+            this.page--;
+            if (this.page < 0) {
+                this.last();
             }
-            if ($scope.totalItems === end) {
-                $scope.currentPage += 0.5;
+        },
+        next() {
+            this.page++;
+            if (this.page >= this.count) {
+                this.first();
             }
+        },
+        last() {
+            this.page = this.count - 1;
         }
-        $scope.page = $scope.productWithImage.slice(begin, end);
     };
     //End
 
@@ -124,7 +154,8 @@ app.controller("danhMucCtrl", function ($scope, $http) {
                 $scope.products = productsResp.data;
                 $scope.productImages = imagesResp.data;
 
-                $scope.productWithImage = $scope.products.map(product => {
+                //Lưu danh sách sau khi load
+                $scope.items = $scope.products.map(product => {
                     const images = $scope.productImages
                         .filter(image => image.product.productId === product.productId)
                         .map(image => image.url);
@@ -133,9 +164,9 @@ app.controller("danhMucCtrl", function ($scope, $http) {
                         images
                     };
                 });
-                $scope.totalItems = $scope.productWithImage.length;
-                $scope.pageChanged();
-                console.log("Success", $scope.page);
+                console.log("Khởi tạo: ", $scope.items)
+                $scope.filteredItems = $scope.items;
+                console.log("Khởi tạo fill 2: ", $scope.filteredItems);
             }).catch((error) => {
                 console.log("Error", error);
             });
