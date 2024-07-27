@@ -8,7 +8,7 @@
                         <form class="form-inline my-2 my-lg-0 mr-auto">
                             <div class="position-relative">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search"
-                                    aria-label="Search">
+                                    aria-label="Search" ng-model="searchKeyword" placeholder="Nhập từ khóa tìm kiếm..." ng-change="filterItems()">
 
                             </div>
                             <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">
@@ -44,9 +44,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="accordion-toggle" data-toggle="collapse"
-                                        data-target="#custom" ng-repeat-start="product in page"
-                                        ng-click="showDetails(product)">
+                                    <tr class="accordion-toggle" data-toggle="collapse" data-target="#custom"
+                                        ng-repeat-start="product in pager.items" ng-click="showDetails(product)">
                                         <td>{{product.productId}}</td>
                                         <td>{{product.productName}}</td>
                                         <td>{{product.unitPrice}}</td>
@@ -63,9 +62,9 @@
                                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                             <li class="nav-item">
                                                                 <a class="nav-link active" id="info-tab"
-                                                                    data-toggle="tab" href="#info"
-                                                                    role="tab" aria-controls="info"
-                                                                    aria-selected="true">Thông tin</a>
+                                                                    data-toggle="tab" href="#info" role="tab"
+                                                                    aria-controls="info" aria-selected="true">Thông
+                                                                    tin</a>
                                                             </li>
                                                         </ul>
                                                         <div class="tab-content mt-3" id="myTabContent">
@@ -93,8 +92,7 @@
                                                                                     class="col-sm-2 col-form-label">Loại
                                                                                     Sản Phẩm</label>
                                                                                 <div class="col-sm-4">
-                                                                                    <select
-                                                                                        class="form-control"
+                                                                                    <select class="form-control"
                                                                                         ng-model="form.category"
                                                                                         ng-options="c as c.name for c in selectBoxCates track by c.categoryId">
                                                                                     </select>
@@ -105,8 +103,7 @@
                                                                                     class="col-sm-2 col-form-label">Nhà
                                                                                     Cung Cấp</label>
                                                                                 <div class="col-sm-4">
-                                                                                    <select
-                                                                                        class="form-control"
+                                                                                    <select class="form-control"
                                                                                         ng-model="form.supplier"
                                                                                         ng-options="c as c.companyName for c in selectBoxSuppliers track by c.supplierId">
                                                                                     </select>
@@ -121,8 +118,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <label
-                                                                                    for="customerBirthdate"
+                                                                                <label for="customerBirthdate"
                                                                                     class="col-sm-2 col-form-label">Số
                                                                                     lượng</label>
                                                                                 <div class="col-sm-4">
@@ -131,8 +127,7 @@
                                                                                         ng-model="form.quantity"
                                                                                         readonly>
                                                                                 </div>
-                                                                                <label
-                                                                                    for="customerDeliveryaAea"
+                                                                                <label for="customerDeliveryaAea"
                                                                                     class="col-sm-2 col-form-label">Giá
                                                                                     tiền</label>
                                                                                 <div class="col-sm-4">
@@ -165,8 +160,12 @@
                                                                             </div>
                                                                             <div class="form-group row">
                                                                                 <div class="file-input-wrapper">
-                                                                                    <button class="btn btn-primary btn-file-input">Chọn Ảnh</button>
-                                                                                    <input class="form-control" id="image" type="file" onchange="angular.element(this).scope().imageChanged(this.files)">
+                                                                                    <button
+                                                                                        class="btn btn-primary btn-file-input">Chọn
+                                                                                        Ảnh</button>
+                                                                                    <input class="form-control"
+                                                                                        id="image" type="file"
+                                                                                        onchange="angular.element(this).scope().imageChanged(this.files)">
                                                                                 </div>
                                                                             </div>
                                                                         </form>
@@ -178,13 +177,12 @@
                                                             <div class="col-md-12">
                                                                 <button type="button" class="btn btn-success"
                                                                     ng-click="update()">Cập nhật</button>
-                                                                <button type="button"
-                                                                    class="btn btn-danger">Ngừng hoạt
+                                                                <button type="button" class="btn btn-danger">Ngừng hoạt
                                                                     động</button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </td>
@@ -193,25 +191,26 @@
                             </table>
                         </div>
                         <br><br>
-                        <div class="row justify-content-center align-items-center g-2">
-                            <div class="col-auto">
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination">
-                                      <li class="page-item" ng-class="{disabled: currentPage === 1}">
-                                          <a class="page-link" ng-click="setPage(1)">First</a>
-                                      </li>
-                                      <li class="page-item" ng-class="{disabled: currentPage === 1}">
-                                          <a class="page-link" ng-click="setPage(currentPage - 1)">Previous</a>
-                                      </li>
-                                      <li class="page-item" ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
-                                          <a class="page-link" ng-click="setPage(currentPage + 1)">Next</a>
-                                      </li>
-                                      <li class="page-item" ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
-                                          <a class="page-link" ng-click="setPage(totalItems/itemsPerPage)">Last</a>
-                                      </li>
-                                  </ul>
-                                  </nav>
-                            </div>
+                        <div class="col offset-md-4">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a ng-click="pager.first()" class="page-link">First</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a ng-click="pager.pre()" class="page-link">Previous</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link">{{pager.page +1}} of {{pager.count}}</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a ng-click="pager.next()" class="page-link">Next</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a ng-click="pager.last()" class="page-link">Last</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>

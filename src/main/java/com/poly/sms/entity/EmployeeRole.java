@@ -27,4 +27,8 @@ public class EmployeeRole implements Serializable {
     @ManyToOne
     @JoinColumn(name = "username")
     private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "branch_id", nullable = true)
+    private Branch branch; // Thêm trường branch để lưu trữ chi nhánh
 }
