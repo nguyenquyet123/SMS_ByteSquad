@@ -12,9 +12,10 @@ public interface OrderService {
 
     Optional<Order> findById(Integer id);
 
+    Order create(JsonNode orderData);
+
     Order save(Order order);
 
     void deleteById(Integer id);
 
-    Order create(JsonNode orderData);
 }
