@@ -16,4 +16,6 @@ public interface EmployeeRoleService {
     EmployeeRole save(EmployeeRole employeeRole);
 
     void deleteById(Integer id);
+
+    List<EmployeeRole> findByRole(String role);
 }

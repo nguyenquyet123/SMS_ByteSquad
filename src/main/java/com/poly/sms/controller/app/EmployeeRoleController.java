@@ -45,6 +45,11 @@ public class EmployeeRoleController {
     public List<EmployeeRole> getMethodName(@PathVariable String username) {
         return employeeRoleService.findByEMploy(username);
     }
+
+    @GetMapping("role")
+    public List<EmployeeRole> getManager() {
+        return employeeRoleService.findByRole("MANAGER");
+    }
     
 
     @PostMapping
