@@ -58,6 +58,8 @@ public class ForgotPasswordController {
         return "site/forgotPassword"; // Trả về trang xác nhận
     }
 
+
+
     public static String generateRandomString(String characters, int length) {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
@@ -69,5 +71,35 @@ public class ForgotPasswordController {
 
         return sb.toString();
     }
+    //   @GetMapping("/reset-password")
+    // public String showResetPasswordForm(Model model) {
+    //     model.addAttribute("employee", new Employee());
+    //     return "site/changePassword";
+    // }
+
+    // @PostMapping("/reset-password")
+    // public String resetPassword(@RequestParam String username, 
+    // @RequestParam String currentPassword, 
+    // @RequestParam String newPassword, 
+    // Model model) {
+    //     Employee employee = employeeService.findByUsername(username);
+    //     if (employee == null) {
+    //         model.addAttribute("message", "Tên người dùng không tồn tại.");
+    //         return "site/changePassword";
+    //     }
+
+    //     if (!passwordEncoder.matches(currentPassword, employee.getPassword())) {
+    //         model.addAttribute("message", "Mật khẩu hiện tại không đúng.");
+    //         return "site/changePassword";
+    //     }
+
+    //     employee.setPassword(passwordEncoder.encode(newPassword)); // Trong thực tế, bạn nên mã hóa mật khẩu trước khi lưu
+    //     employeeService.save(employee);
+
+    //     model.addAttribute("message", "Mật khẩu đã được thay đổi thành công.");
+    //     return "site/changePassword";
+    // }
+
+
 
 }
