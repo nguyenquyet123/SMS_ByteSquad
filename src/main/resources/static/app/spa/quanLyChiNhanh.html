@@ -6,11 +6,16 @@
           <div class="card-body">
             <form class="form-inline my-2 my-lg-0 mr-auto">
               <div class="position-relative">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <i class="fas fa-search search-icon"></i>
+                <input class="form-control mr-sm-2" type="search" aria-label="Search" ng-model="searchKeyword"
+                  placeholder="Nhập từ khóa tìm kiếm..." ng-change="filterItems()">
+
               </div>
               <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">
+<<<<<<< HEAD
 
+=======
+                Sreach
+>>>>>>> thinhpt
               </button>
               <div class="ml-auto">
                 <button type="button" class="btn btn-primary">
@@ -32,21 +37,19 @@
                     <th>Tên chi nhánh</th>
                     <th>Quản lý</th>
                     <th>Địa chỉ</th>
-                    <th></th>
                     <th>Số điện thoại</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr data-toggle="collapse" data-target="#customer1" class="accordion-toggle">
-                    <td>6</td>
-                    <td>Branch A</td>
-                    <td>Alice Johnson</td>
-                    <td>111 North St</td>
-                    <td></td>
-                    <td>111222333</td>
-                    <td></td>
+                  <tr data-toggle="collapse" data-target="#customer1" class="accordion-toggle"
+                    ng-repeat-start="branch in pager.items" ng-click="showDetails(branch)">
+                    <td>{{branch.branchId}}</td>
+                    <td>{{branch.branchName}}</td>
+                    <td>{{branch.managerName}}</td>
+                    <td>{{branch.address}}</td>
+                    <td>{{branch.phone}}</td>
                   </tr>
-                  <tr>
+                  <tr ng-if="selectedRow === branch" ng-repeat-end>
                     <td colspan=" 8" class="hiddenRow">
                       <div id="customer1" class="accordion-body collapse p-3">
                         <div class="card">
@@ -68,45 +71,62 @@
                                         <label for="customerID" class="col-sm-2 col-form-label">Mã chi
                                           nhánh</label>
                                         <div class="col-sm-4">
+<<<<<<< HEAD
                                           <input type="text" class="form-control" id="customerID" value="1" readonly>
+=======
+                                          <input type="text" class="form-control" id="customerID" ng-model="form.branchId" readonly>
+>>>>>>> thinhpt
                                         </div>
-                                        <label for="customerPhone" class="col-sm-2 col-form-label">Kiểu chi
-                                          nhánh</label>
+                                        <label for="customerEmail" class="col-sm-2 col-form-label">Người
+                                          Tạo</label>
                                         <div class="col-sm-4">
-                                          <input type="text" class="form-control" id="customerPhone"
-                                            value="World wide trades" readonly>
+                                          <input type="text" class="form-control" id="customerEmail" ng-model="form.employee.fullname" readonly>
                                         </div>
                                       </div>
                                       <div class="form-group row w-100 justify-content-between">
                                         <label for="customerName" class="col-sm-2 col-form-label">Tên chi
                                           nhánh</label>
                                         <div class="col-sm-4">
+<<<<<<< HEAD
                                           <input type="text" class="form-control" id="customerName" value="Thanh Toàn"
                                             readonly>
+=======
+                                          <input type="text" class="form-control" id="customerName" ng-model="form.branchName"
+                                            >
+>>>>>>> thinhpt
                                         </div>
                                         <label for="customerAddress" class="col-sm-2 col-form-label">Quản lý cửa
                                           hàng</label>
                                         <div class="col-sm-4">
                                           <input type="text" class="form-control" id="customerAddress"
-                                            value="số 1 ngõ 45 huỳnh thúc kháng" readonly>
+                                            ng-model="form.managerName">
                                         </div>
                                       </div>
                                       <div class="form-group row w-100 justify-content-between">
                                         <label for="customerEmail" class="col-sm-2 col-form-label">Địa chỉ cửa
                                           hàng</label>
                                         <div class="col-sm-4">
+<<<<<<< HEAD
                                           <input type="text" class="form-control" id="customerEmail" value="" readonly>
+=======
+                                          <input type="text" class="form-control" id="customerEmail" ng-model="form.address">
+>>>>>>> thinhpt
                                         </div>
                                         <label for="customerCreateDate" class="col-sm-2 col-form-label">Số điện
                                           thoại</label>
                                         <div class="col-sm-4">
+<<<<<<< HEAD
                                           <input type="text" class="form-control" id="customerCreateDate" value="USA"
                                             readonly>
+=======
+                                          <input type="text" class="form-control" id="customerCreateDate" ng-model="form.phone">
+>>>>>>> thinhpt
                                         </div>
                                       </div>
                                       <div class="form-group row w-100 justify-content-between">
                                         <label for="customerEmail" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-4">
+<<<<<<< HEAD
                                           <input type="text" class="form-control" id="customerEmail" value="" readonly>
                                         </div>
                                         <label for="customerCreateDate" class="col-sm-2 col-form-label">Trạng
@@ -120,22 +140,23 @@
                                           Tạo</label>
                                         <div class="col-sm-4">
                                           <input type="text" class="form-control" id="customerEmail" readonly>
+=======
+                                          <input type="text" class="form-control" id="customerEmail" ng-model="form.email">
+>>>>>>> thinhpt
                                         </div>
                                         <label for="customerCreateDate" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-4">
-
                                         </div>
                                       </div>
                                     </form>
                                   </div>
-
                                 </div>
                               </div>
                               <!-- Add other tab contents here as needed -->
                             </div>
                             <div class="row mt-3">
                               <div class="col-md-12">
-                                <button type="button" class="btn btn-success">Cập nhật</button>
+                                <button type="button" class="btn btn-success" ng-click="update()">Cập nhật</button>
                                 <button type="button" class="btn btn-danger">Ngừng hoạt
                                   động</button>
                               </div>
@@ -149,6 +170,28 @@
                   <!-- Add more customer rows as needed -->
                 </tbody>
               </table>
+            </div>
+            <br><br>
+            <div class="col offset-md-4">
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a ng-click="pager.first()" class="page-link">First</a>
+                  </li>
+                  <li class="page-item">
+                    <a ng-click="pager.pre()" class="page-link">Previous</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link">{{pager.page +1}} of {{pager.count}}</a>
+                  </li>
+                  <li class="page-item">
+                    <a ng-click="pager.next()" class="page-link">Next</a>
+                  </li>
+                  <li class="page-item">
+                    <a ng-click="pager.last()" class="page-link">Last</a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>

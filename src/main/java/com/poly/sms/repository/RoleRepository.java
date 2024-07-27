@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.poly.sms.entity.Role;
 
+
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
     Role findByName(String name);
+    Role findByRoleId(String roleId);
 }
 
