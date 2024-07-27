@@ -142,7 +142,7 @@ site.controller("siteCtrl", function ($scope, $http) {
             .then((resp) => {
               alert("Đặt Hàng thành công");
               $scope.clear();
-              // location.href = "/order/detail/" + resp.data.id;
+              location.href = "http://localhost:8080/sms/orderhistory";
             })
             .catch((error) => {
               alert("Đặt Hàng thất bại");
@@ -165,7 +165,7 @@ site.controller("siteCtrl", function ($scope, $http) {
       $scope.orderHistory = resp.data;
       var username = { username: $("#username").text().trim() };
       $scope.filteredOrderHistory = $scope.orderHistory.filter(
-        (order) => order.orderType === 'a'
+        (order) => order.orderType === "a"
       );
     })
     .catch((error) => {
