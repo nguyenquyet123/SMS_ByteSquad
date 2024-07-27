@@ -57,6 +57,7 @@
                             <a href="#" class="nav-link" data-bs-toggle="dropdown">
                                 <i class="fas fa-user fa-2x"></i>
                                 <th:block sec:authorize="isAuthenticated()">
+                                    
                                     <span th:text="'[' + ${#authentication.name} + ']'"></span>
                                 </th:block>
                             </a>

@@ -34,6 +34,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
+    
+    @ManyToOne
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
 
     @Column(name = "product_name", nullable = false, length = 50, columnDefinition = "NVARCHAR")
     private String productName;
