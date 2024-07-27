@@ -1,7 +1,9 @@
-app.controller('loaiSanPhamCtrl', function ($scope, $http) {
+app.controller('QLChiNhanhCtrl', function ($scope, $http) {
     $scope.form = {};//đọc dữ liệu trên form
     $scope.items = [];//dùng để lưu tạm sau khi load
-    //sử dụng để hiển thị trang và tìm kiếm
+    $scope.filteredItems = [];
+    $scope.username = document.getElementById('username').textContent;
+    console.log($scope.username);
 
     //reset
     $scope.reset = () => {
@@ -9,25 +11,41 @@ app.controller('loaiSanPhamCtrl', function ($scope, $http) {
     }
     //Create
     $scope.create = function () {
-        console.log("star")
-        var item = angular.copy($scope.form);
-        $http.post(`${host}/categories`, item).then(reps => {
-            $scope.items.push(reps.data);
-            console.log("Create:", reps.data);
-            alert("Them moi thanh cong");
-            $scope.reset();
+        console.log("start");
+
+        $http.get(`${host}/employees/${$scope.username}`).then(reps => {
+            $scope.form.employee = reps.data;
+            console.log("employee:", reps.data);
+
+            // Các dòng lệnh sau sẽ chỉ được thực thi sau khi lấy được dữ liệu nhân viên
+            $scope.form.branchType = "Retail";
+            $scope.form.branchState = 1;
+            console.log("Form: ", $scope.form);
+            var item = angular.copy($scope.form);
+            console.log("item: ", item);
+
+            $http.post(`${host}/branches`, item).then(reps => {
+                $scope.items.push(reps.data);
+                console.log("Create:", reps.data);
+                alert("Thêm mới thành công");
+                $scope.reset();
+            }).catch(error => {
+                alert("Thêm mới thất bại");
+                console.log("Error", error);
+            });
         }).catch(error => {
-            alert("Them moi that bai");
+            alert("Không thể lấy dữ liệu nhân viên");
             console.log("Error", error);
-        })
-    }
+        });
+    };
+    
 
     //Update
     $scope.update = function () {
         var item = angular.copy($scope.form);
         console.log(item)
-        $http.put(`${host}/categories/${item.categoryId}`, item).then(reps => {
-            var index = $scope.items.findIndex(p => p.categoryId == item.categoryId);
+        $http.put(`${host}/branches/${item.branchId}`, item).then(reps => {
+            var index = $scope.items.findIndex(p => p.branchId == item.branchId);
             $scope.items[index] = item;
             alert("Cap nhat thanh cong");
             console.log("Update : ", reps.data)
@@ -53,13 +71,15 @@ app.controller('loaiSanPhamCtrl', function ($scope, $http) {
     $scope.searchKeyword = '';
 
     $scope.filterItems = function () {
-        console.log("a",$scope.filteredItems)
-        console.log("b",$scope.items)
+        console.log("a", $scope.filteredItems)
+        console.log("b", $scope.items)
         $scope.filteredItems = $scope.items.filter(function (item) {
             //Các trường của list số + .toString(),chữ + toLowerCase()
-            return item.categoryId.toString().includes($scope.searchKeyword) ||
-                item.name.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
-                item.description.toLowerCase().includes($scope.searchKeyword.toLowerCase());
+            return item.branchId.toString().includes($scope.searchKeyword) ||
+                item.branchName.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
+                item.managerName.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
+                item.address.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
+                item.phone.toString().includes($scope.searchKeyword);
         });
         $scope.pager.first();
     };
@@ -99,12 +119,12 @@ app.controller('loaiSanPhamCtrl', function ($scope, $http) {
     //Khởi Tạo
     $scope.init = () => {
         //load categories
-        $http.get(`${host}/categories`).then((resp) => {
+        $http.get(`${host}/branches`).then((resp) => {
             //Lưu danh sách sau khi load
             $scope.items = resp.data;
             //filteredItems sử dụng để tìm kiếm,đổ tất cả lên trang hoặc theo key search
             $scope.filteredItems = $scope.items;
-            console.log("Categories: ", $scope.items)
+            console.log("Branch: ", $scope.items)
         }).catch((error) => {
             console.log("Error", error);
         });
@@ -112,28 +132,4 @@ app.controller('loaiSanPhamCtrl', function ($scope, $http) {
 
     $scope.init();
 
-    //Chỉnh Sủa Tab
-    $scope.switchTab = function (event, tabId) {
-        event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
-
-        // Xóa lớp 'active' từ tất cả các tab
-        var tabs = document.querySelectorAll('.nav-link');
-        tabs.forEach(function (tab) {
-            tab.classList.remove('active');
-        });
-
-        // Thêm lớp 'active' vào tab được nhấp
-        var clickedTab = document.getElementById(tabId + '-tab');
-        clickedTab.classList.add('active');
-
-        // Ẩn tất cả các nội dung tab
-        var tabContents = document.querySelectorAll('.tab-pane');
-        tabContents.forEach(function (content) {
-            content.classList.remove('show', 'active');
-        });
-
-        // Hiển thị nội dung của tab được nhấp
-        var activeContent = document.getElementById(tabId);
-        activeContent.classList.add('show', 'active');
-    };
 });

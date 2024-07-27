@@ -7,9 +7,11 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/thietLapChiNhanh", {
       templateUrl: "/app/spa/thietLapChiNhanh.html",
+      controller : "QLChiNhanhCtrl"
     })
     .when("/quanLyChiNhanh", {
       templateUrl: "/app/spa/quanLyChiNhanh.html",
+      controller : "QLChiNhanhCtrl"
     })
     .when("/quanLyNguoiDung", {
       templateUrl: "/app/spa/quanLyNguoiDung.html",
