@@ -1,8 +1,7 @@
 var site = angular.module("mySite", ["ngRoute"]);
 
 site.config(function ($httpProvider) {
-  $httpProvider.defaults.headers.common["Authorization"] =
-    "Basic YWRtaW46MTIz";
+  $httpProvider.defaults.headers.common["Authorization"] = "Basic YWRtaW46MTIz";
 });
 let host = "http://localhost:8080/api";
 
@@ -107,19 +106,12 @@ site.controller("siteCtrl", function ($scope, $http) {
 
   // ------------Xu ly Place order
 
-  $scope.customer = { password: "123" };
-
   $scope.order = {
-    orderType: "a",
-    seller: "onlSeller",
+    orderType: "order web",
     orderDate: new Date(),
-    requiredDate: new Date(),
-    totalPrice: 4,
-    shipAddress: "",
-    billingAddress: "",
+    totalPrice: $scope.total(),
     orderStatus: 1,
-    comments: "",
-    branch: { branchId: 6 },
+    branch: { branchId: 3 },
     get orderDetails() {
       return $scope.productWithImgs.map((item) => {
         return {
@@ -130,23 +122,13 @@ site.controller("siteCtrl", function ($scope, $http) {
       });
     },
     purchase() {
-      var item = angular.copy($scope.customer);
+      var order = angular.copy($scope.order);
       $http
-        .post(`${host}/customers`, item)
+        .post(`${host}/orders`, order)
         .then((resp) => {
-          $scope.order.customer = resp.data;
-          var order = angular.copy($scope.order);
-          $http
-            .post(`${host}/orders`, order)
-            .then((resp) => {
-              alert("Đặt Hàng thành công");
-              $scope.clear();
-              location.href = "http://localhost:8080/sms/orderhistory";
-            })
-            .catch((error) => {
-              alert("Đặt Hàng thất bại");
-              console.log(error);
-            });
+          alert("Đặt Hàng thành công");
+          $scope.clear();
+          // location.href = "http://localhost:8080/sms/orderhistory";
         })
         .catch((error) => {
           alert("Đặt Hàng thất bại");
@@ -157,17 +139,18 @@ site.controller("siteCtrl", function ($scope, $http) {
 
   // ------------Xu ly Order history
 
-  $scope.orderHistory = [];
-  $http
-    .get(`${host}/orders`)
-    .then((resp) => {
-      $scope.orderHistory = resp.data;
-      var username = { username: $("#username").text().trim() };
-      $scope.filteredOrderHistory = $scope.orderHistory.filter(
-        (order) => order.orderType === "a"
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  // $scope.orderHistory = [];
+  // $http
+  //   .get(`${host}/orders`)
+  //   .then((resp) => {
+  //     $scope.orderHistory = resp.data;
+  //     var username = { username: $("#username").text().trim() };
+  //     $scope.filteredOrderHistory = $scope.orderHistory.filter(
+  //       (order) => order.branch.managerBranch.username === username
+  //     );
+  //     console.log($scope.orderHistory);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 });
