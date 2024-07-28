@@ -23,7 +23,7 @@ public class changePasswordController {
     @Autowired
     EmployeeService employeeService;
 
-    @GetMapping("/reset-password")
+     @GetMapping("/reset-password")
     public String showResetPasswordForm(Model model) {
         model.addAttribute("employee", new Employee());
         return "site/changePassword";
