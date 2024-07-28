@@ -40,15 +40,15 @@
                 <div class="row g-4 mb-5">
                     <div class="col-lg-8 col-xl-9">
                         <div class="row g-4">
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <div class="border rounded">
-                                    <a href="#">
+                                    <div class="rounded">
                                         <img th:src="${'/site/img/' + selectedProductWithImage.productImage.url}"
                                             class="img-fluid rounded" alt="Image">
-                                    </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <h4 class="fw-bold mb-3" th:text="${selectedProductWithImage.product.productName}"></h4>
                                 <h5 class="fw-bold mb-3"
                                     th:text="'$' + ${selectedProductWithImage.product.unitPrice} + '/kg'">
@@ -57,6 +57,16 @@
                                 <a th:attr="ng-click=@{|add(${selectedProductWithImage.product.productId})|}"
                                     class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
                                         class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
+                        </div>
+                        <div class="row g-4 mt-1">
+                            <div class="col-lg-2" th:each="item, iterStat : ${productImages}"
+                                th:if="${iterStat.index < 4}">
+                                <div class="border rounded">
+                                    <div class="rounded">
+                                        <img class="img-fluid rounded" th:src="${'/site/img/' + item.url}">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,7 +109,9 @@
                 <div class="row g-4">
                     <div class="col-lg-12">
                         <div class="row g-4">
-                            <div class="col-md-6 col-lg-4 col-xl-3" th:each="productWithImage : ${productWithImages}">
+                            <div class="col-md-6 col-lg-4 col-xl-3"
+                                th:each="productWithImage, iterStat : ${productWithImages}"
+                                th:if="${iterStat.index < 4}">
                                 <div class="rounded position-relative fruite-item">
                                     <div class="fruite-img">
                                         <a

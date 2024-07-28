@@ -107,7 +107,7 @@ site.controller("siteCtrl", function ($scope, $http) {
   // ------------Xu ly Place order
 
   $scope.order = {
-    orderType: "order web",
+    orderType: "onl",
     orderDate: new Date(),
     totalPrice: $scope.total(),
     orderStatus: 1,
