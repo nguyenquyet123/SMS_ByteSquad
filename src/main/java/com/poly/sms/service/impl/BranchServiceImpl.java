@@ -34,4 +34,9 @@ public class BranchServiceImpl implements BranchService {
     public void deleteById(Integer id) {
         branchRepository.deleteById(id);
     }
+
+    @Override
+    public List<Branch> getBranchIdByManagerUsername(String username) {
+        return branchRepository.findBranchByManagerBranchUsername(username);
+    }
 }

@@ -105,7 +105,7 @@ app.config(function ($routeProvider, $httpProvider) {
     });
 
   $httpProvider.defaults.headers.common["Authorization"] =
-    "Basic dGVzdFVzZXI6MTIz";
+    "Basic YWRtaW46MTIz";
 });
 
 let host = "http://localhost:8080/api";

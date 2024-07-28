@@ -43,16 +43,12 @@ public class OrderController {
         if (order.isPresent()) {
             Order updatedOrder = order.get();
             updatedOrder.setOrderType(orderDetails.getOrderType());
-            updatedOrder.setSeller(orderDetails.getSeller());
             updatedOrder.setOrderDate(orderDetails.getOrderDate());
-            updatedOrder.setRequiredDate(orderDetails.getRequiredDate());
             updatedOrder.setTotalPrice(orderDetails.getTotalPrice());
             updatedOrder.setShipAddress(orderDetails.getShipAddress());
-            updatedOrder.setBillingAddress(orderDetails.getBillingAddress());
             updatedOrder.setOrderStatus(orderDetails.getOrderStatus());
             updatedOrder.setComments(orderDetails.getComments());
             updatedOrder.setBranch(orderDetails.getBranch());
-            updatedOrder.setCustomer(orderDetails.getCustomer());
             return ResponseEntity.ok(orderService.save(updatedOrder));
         } else {
             return ResponseEntity.notFound().build();

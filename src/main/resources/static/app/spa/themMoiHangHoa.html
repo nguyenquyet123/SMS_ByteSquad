@@ -70,7 +70,14 @@
                                     <input class="form-control" id="image" type="file"
                                         onchange="angular.element(this).scope().imageChanged(this.files)">
                                 </div>
-                                <div class="form-group col-md-8">
+                                <div class="form-group col-md-4">
+                                    <label for="branchName">Chi Nhánh</label>
+                                    <select class="form-control" ng-model="form.branch"
+                                        ng-options="c as c.branchName for c in selectBoxBranchs track by c.branchId">
+                                        <option value="">Chọn Chi nhanh</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
                                     <label for="" class="form-label">Mô Tả:</label>
                                     <textarea class="form-control" name="" id="" rows="3"></textarea>
                                 </div>
