@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/branches")
 public class BranchController {
 
     @Autowired
     private BranchService branchService;
+
+    @GetMapping("/manager/{username}")
+    public List<Branch> getBranchIdByManagerUsername(@PathVariable String username) {
+        return branchService.getBranchIdByManagerUsername(username);
+    }
 
     @GetMapping
     public ResponseEntity<List<Branch>> getAllBranches() {

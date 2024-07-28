@@ -2,6 +2,7 @@ package com.poly.sms.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

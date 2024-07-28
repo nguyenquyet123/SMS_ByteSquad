@@ -14,4 +14,6 @@ public interface BranchService {
     Branch save(Branch branch);
 
     void deleteById(Integer id);
+    
+    List<Branch> getBranchIdByManagerUsername(String username);
 }
