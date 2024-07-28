@@ -46,6 +46,7 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/dathang", {
       templateUrl: "/app/spa/dathang.html",
+      controller: "datHangCtrl",
     })
     .when("/nhaphang", {
       templateUrl: "/app/spa/nhaphang.html",

@@ -117,7 +117,7 @@ app.controller("danhMucCtrl", function ($scope, $http) {
 
     $scope.pager = {
         page: 0,
-        size: 8,
+        size: 2,
         // dùng để duyệt mảng và đổ lên client
         get items() {
             var start = this.page * this.size;
