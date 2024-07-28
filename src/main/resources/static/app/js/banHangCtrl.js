@@ -113,11 +113,11 @@ app.controller("banHangCtrl", function ($scope, $http) {
       //Luu gio hang vao local storage
       saveToLocalStorage() {
           var json = JSON.stringify(angular.copy(this.items));
-          localStorage.setItem("cart", json);
+          localStorage.setItem("cart_app", json);
       },
       //Doc gio hang tu local storage
       loadFromLocalStorage() {
-          var json = localStorage.getItem("cart");
+          var json = localStorage.getItem("cart_app");
           this.items = json ? JSON.parse(json) : [];
       }
   }
