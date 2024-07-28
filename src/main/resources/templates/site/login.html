@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Majestic Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="/app/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/app/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/app/css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/app/images/favicon.png" />
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="/app/images/logo.svg" alt="logo">
+              </div>
+              <div th:if="${message}" class="alert alert-success">
+                <p th:text="${message}"></p>
+            </div>
+              <form class="pt-3" th:action="@{/login}" method="post">
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-lg" placeholder="Username" name="username">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control form-control-lg" placeholder="Password" name="password">
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN
+                    IN</button>
+                </div>
+                <div class="form-group ml-4 my-2 d-flex justify-content-between align-items-center">
+                  <label>
+                    <input class="form-check-input" type="checkbox" name="remember-me" checked  >
+                    Remember me?
+                  </label>
+                  <label><a th:href="@{/sms/forgot}">Forgot
+                      password?</a></label>
+                </div>
+                <div class="mb-2">
+                  <button type="button" class="btn btn-block btn-google auth-form-btn">
+                    <i class="mdi mdi-google mr-2"></i>
+                    Connect using google
+                  </button>
+                </div>
+                <div class="text-center mt-4 font-weight-light">
+                  Don't have an account? <a th:href="@{/sms/register}" class="text-primary">Create</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+  <script src="/app/vendors/base/vendor.bundle.base.js"></script>
+  <script src="/app/js/template.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<div>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-inline my-2 my-lg-0 mr-auto">
+                            <div class="position-relative">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                                    aria-label="Search">
+                            </div>
+                            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            <div class="ml-auto">
+                                <a href="#!danhmuc">
+                                    <button type="button" class="btn btn-primary ml-2">
+                                        <i class="fas fa-th-list"></i> Danh mục sản phẩm
+                                    </button>
+                                </a>
+                            </div>
+                        </form>
+                        <br>
+                        <div class="col-md-4">
+                            <img ng-if="form.images == null" src="https://via.placeholder.com/150" alt="Placeholder Image" class="img-fluid">
+                            <img ng-if="form.images != null" ng-src="/site/img/{{form.images}}" style="max-width: 100%; height: 150px;" alt="Customer Image">
+                        </div>
+                        <br>
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="branchType">Loại Sản Phẩm</label>
+                                    <select class="form-control" ng-model="form.category"
+                                        ng-options="c as c.name for c in selectBoxCates track by c.categoryId">
+                                        <option value="">Chọn Loại Hàng</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="branchName">Nhà Cung Cấp</label>
+                                    <select class="form-control" ng-model="form.supplier"
+                                        ng-options="c as c.companyName for c in selectBoxSuppliers track by c.supplierId">
+                                        <option value="">Chọn Nhà Cung Cấp</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="managerName">Tên sản phẩm</label>
+                                    <input type="text" class="form-control" ng-model="form.productName" id="managerName"
+                                        placeholder="Nhập tên sản phẩm">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="branchAddress">Số lượng</label>
+                                    <input type="text" class="form-control" id="branchAddress"
+                                        placeholder="Nhập số lượng" ng-model="form.quantity">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="phoneNumber">Giá tiền</label>
+                                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Nhập giá tiền" ng-model="form.unitPrice">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="creator">Giảm giá</label>
+                                    <input type="text" class="form-control" id="creator"
+                                        placeholder="Nhập giảm giá của sản phẩm" ng-model="form.discount">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="file-input-wrapper col-md-4">
+                                    <button class="btn btn-primary btn-file-input">Chọn Ảnh</button>
+                                    <input class="form-control" id="image" type="file"
+                                        onchange="angular.element(this).scope().imageChanged(this.files)">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="branchName">Chi Nhánh</label>
+                                    <select class="form-control" ng-model="form.branch"
+                                        ng-options="c as c.branchName for c in selectBoxBranchs track by c.branchId">
+                                        <option value="">Chọn Chi nhanh</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="" class="form-label">Mô Tả:</label>
+                                    <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Reset</button>
+                        <button type="button" ng-click="create()" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
