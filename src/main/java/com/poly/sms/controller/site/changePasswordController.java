@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.sms.entity.Employee;
-import com.poly.sms.service.EmailService;
 import com.poly.sms.service.EmployeeService;
 
 /**
@@ -33,13 +32,6 @@ public class changePasswordController {
 
     @Autowired
     EmployeeService employeeService; // Repository để tìm kiếm người dùng
-
-    @Autowired
-    private EmailService emailService; // Dịch vụ gửi email
-
-
-
-
 
      @GetMapping("/reset-password")
     public String showResetPasswordForm(Model model) {

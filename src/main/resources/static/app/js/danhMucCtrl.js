@@ -3,6 +3,8 @@ app.controller("danhMucCtrl", function ($scope, $http) {
     $scope.items = [];//dùng để lưu tạm sau khi load
    //sử dụng để hiển thị trang và tìm kiếm
     $scope.products = [];
+    $scope.username = document.getElementById('username').textContent;
+    
 
     //reset
     $scope.reset = () => {
@@ -60,7 +62,7 @@ app.controller("danhMucCtrl", function ($scope, $http) {
             $scope.reset();
         }).catch(error => {
             alert("Them moi that bai");
-            console.log("Error", error);
+            console.log("Error", error.message);
         })
     }
     //Update
@@ -177,6 +179,12 @@ app.controller("danhMucCtrl", function ($scope, $http) {
         //load categories
         $http.get(`${host}/suppliers`).then((resp) => {
             $scope.selectBoxSuppliers = resp.data;
+        })
+        //load Chi nhánh
+        $http.get(`${host}/branches`).then((resp) => {
+            $scope.selectBoxBranchs = resp.data;
+        }).catch(error =>{
+            console.log("Error: ",error.message)
         })
     };
 

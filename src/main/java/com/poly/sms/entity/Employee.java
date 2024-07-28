@@ -11,8 +11,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -31,16 +29,6 @@ public class Employee {
     private String phone;
 
     private Date registrationDate;
-
-    private Date birthDate;
-
-    private String address;
-
-    private BigDecimal salary;
-
-    private String photoPath;
-
-    private Timestamp lastUpdate;
 
     @JsonIgnore
     @OneToMany(mappedBy = "employee")
