@@ -2,7 +2,7 @@ var site = angular.module("mySite", ["ngRoute"]);
 
 site.config(function ($httpProvider) {
   $httpProvider.defaults.headers.common["Authorization"] =
-    "Basic bWFuYWdlOjEyMw==";
+    "Basic dGVzdFVzZXI6MTIz";
 });
 let host = "http://localhost:8080/api";
 
