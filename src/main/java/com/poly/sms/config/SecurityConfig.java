@@ -27,7 +27,6 @@ public class SecurityConfig {
         http.authorizeHttpRequests(
                 auth -> auth
                         .requestMatchers("/sms/checkout").authenticated()
-                        .requestMatchers("/sms/orderhistory").authenticated()
                         .requestMatchers("/sms/app").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll());

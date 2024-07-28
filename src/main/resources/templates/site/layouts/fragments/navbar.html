@@ -64,9 +64,6 @@
                                 <a th:href="@{/sms/login}" class="dropdown-item">Login</a>
                                 <a th:href="@{/sms/register}" class="dropdown-item">Register</a>
                                 <a th:href="@{/sms/forgot}" class="dropdown-item">ForgotPassword</a>
-                                <th:block sec:authorize="isAuthenticated()">
-                                    <a th:href="@{/sms/orderhistory}" class="dropdown-item">Order history</a>
-                                </th:block>
                                 <a th:href="@{/sms/logout}" class="dropdown-item">Logout</a>
                             </div>
                         </div>

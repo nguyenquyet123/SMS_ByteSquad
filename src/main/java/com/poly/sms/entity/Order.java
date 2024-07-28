@@ -51,6 +51,10 @@ public class Order {
     @Column(name = "comments", columnDefinition = "TEXT")
     private String comments;
 
+    private String customerName;
+
+    private String customerPhone;
+
     @ManyToOne
     @JoinColumn(name = "branch_id", nullable = false)
     private Branch branch;

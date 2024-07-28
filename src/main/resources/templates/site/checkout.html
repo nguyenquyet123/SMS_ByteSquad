@@ -47,23 +47,19 @@
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Fullname<sup>*</sup></label>
-                                <input type="text" class="form-control" ng-model="customer.name">
-                            </div>
-                            <div class="form-item">
-                                <label class="form-label my-3">Email<sup>*</sup></label>
-                                <input type="text" class="form-control" ng-model="customer.email">
+                                <input type="text" class="form-control" ng-model="order.customerName">
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Phone<sup>*</sup></label>
-                                <input type="text" class="form-control" ng-model="customer.phone">
+                                <input type="text" class="form-control" ng-model="order.customerPhone">
                             </div>
                             <div class="form-item">
-                                <label class="form-label my-3">Address<sup>*</sup></label>
-                                <input type="text" class="form-control">
+                                <label class="form-label my-3">Shipping address<sup>*</sup></label>
+                                <input type="text" class="form-control" ng-model="order.shipAddress">
                             </div>
                             <div class="form-item my-3">
                                 <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11"
-                                    placeholder="Oreder Notes (Optional)"></textarea>
+                                    placeholder="Oreder Notes (Optional)" ng-model="order.comments"></textarea>
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-6 col-xl-5">
