@@ -18,5 +18,4 @@ public interface OrderService {
 
     void deleteById(Integer id);
 
-    Order create(JsonNode orderData);
 }
