@@ -5,17 +5,25 @@
 
 package com.poly.sms.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author hoang
  */
 @Entity
+@Setter
+@Getter
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +37,19 @@ public class Email {
 
     @Column(nullable = false)
     private String message;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime dateTime;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateTime = LocalDateTime.now(); // Thiết lập ngày giờ hiện tại khi tạo entity
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.dateTime = LocalDateTime.now(); // Cập nhật ngày giờ hiện tại khi cập nhật entity
+    }
 
     // Getters và setters
     public Long getId() {

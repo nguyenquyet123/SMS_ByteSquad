@@ -5,17 +5,16 @@
 
 package com.poly.sms.service;
 
-import com.poly.sms.entity.Email;
+import java.util.List;
 
-/**
- *
- * @author hoang
- */
+import com.poly.sms.entity.Email;
 public interface EmailService {
   
 
     void sendEmail(Email email);
     void sendPasswordWithCredentials(String to, String password);
+    Email save(Email email);
+    List<Email> findAll();
     
 }
 

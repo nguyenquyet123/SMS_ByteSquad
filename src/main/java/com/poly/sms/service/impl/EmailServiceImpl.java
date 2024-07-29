@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.poly.sms.entity.Email;
+import com.poly.sms.repository.EmailRepository;
 import com.poly.sms.service.EmailService;
 
 /**
@@ -22,7 +23,8 @@ import com.poly.sms.service.EmailService;
 @Service
 public class EmailServiceImpl implements EmailService{
 
-
+    @Autowired
+    private EmailRepository emailRepository;
 
      @Autowired
     private JavaMailSender mailSender;
@@ -60,4 +62,15 @@ public class EmailServiceImpl implements EmailService{
         message.setText("Mật khẩu của bạn là: " + password);
         mailSender.send(message);
     }
+    @Override
+    public Email save(Email email) {
+        return emailRepository.save(email);
+    }
+    @Override
+    public java.util.List<Email> findAll() {
+       return emailRepository.findAll();
+    }
+
+
+   
     }

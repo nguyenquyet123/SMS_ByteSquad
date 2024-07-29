@@ -68,11 +68,12 @@ app.config(function ($routeProvider, $httpProvider) {
     .when("/khoHang", {
       templateUrl: "/app/spa/khoHang.html",
     })
+    .when("/homthu", {
+      templateUrl: "/app/spa/homthu.html",
+      controller: "HomThuCtrl",
+    })
     .when("/themMoiKhoHang", {
       templateUrl: "/app/spa/themMoiKhoHang.html",
-    })
-    .when("/khachhang", {
-      templateUrl: "/app/spa/khachhang.html",
     })
     .when("/themMoiKhachHang", {
       templateUrl: "/app/spa/themMoiKhachHang.html",

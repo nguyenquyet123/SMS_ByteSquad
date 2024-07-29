@@ -59,7 +59,7 @@
                         </iframe>
                         </div>
                         <div class="col-lg-7">
-                            <form th:action="@{/sms/send}" th:object="${email}" method="post">
+                            <form th:action="@{/sms/send(message=${true})}" th:object="${email}" method="post">
                                 <input type="text" th:field="*{name}" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name" required>
                                 <input for ="email" type="email" th:field="*{emailD}" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email" required>
                                 <textarea th:field="*{message}" class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message" required></textarea>
