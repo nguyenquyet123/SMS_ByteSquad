@@ -12,29 +12,36 @@
                             </form>
                         </div>
                         <div class="image-card">
-                            <figure class="image-item text-center" ng-repeat="product in page">
-                                <img  ng-src="/site/img/{{product.images[0]}}" alt="Image 1" ng-click="cart.add(product.productId)">
-                                <figcaption>{{product.productName}}</figcaption>
+                            <figure class="image-item text-center" ng-repeat="product in page"
+                                style="position: relative; width: 100%; padding-bottom: 100%;">
+                                <img ng-src="/site/img/{{product.images[0]}}" alt="Image 1"
+                                    ng-click="cart.add(product.productId)"
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                                <figcaption style="position: absolute; bottom: 0; width: 100%; text-align: center;">
+                                    {{product.productName}}</figcaption>
                             </figure>
                         </div>
+
                         <div class="row justify-content-center align-items-center g-2">
                             <div class="col-auto">
-                                <nav aria-label="Page navigation">
+                                <nav aria-label="Page navigation" style="margin-top: 10px;">
                                     <ul class="pagination">
-                                      <li class="page-item" ng-class="{disabled: currentPage === 1}">
-                                          <a class="page-link" ng-click="setPage(1)">First</a>
-                                      </li>
-                                      <li class="page-item" ng-class="{disabled: currentPage === 1}">
-                                          <a class="page-link" ng-click="setPage(currentPage - 1)">Previous</a>
-                                      </li>
-                                      <li class="page-item" ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
-                                          <a class="page-link" ng-click="setPage(currentPage + 1)">Next</a>
-                                      </li>
-                                      <li class="page-item" ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
-                                          <a class="page-link" ng-click="setPage(totalItems/itemsPerPage)">Last</a>
-                                      </li>
-                                  </ul>
-                                  </nav>
+                                        <li class="page-item" ng-class="{disabled: currentPage === 1}">
+                                            <a class="page-link" ng-click="setPage(1)">First</a>
+                                        </li>
+                                        <li class="page-item" ng-class="{disabled: currentPage === 1}">
+                                            <a class="page-link" ng-click="setPage(currentPage - 1)">Previous</a>
+                                        </li>
+                                        <li class="page-item"
+                                            ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
+                                            <a class="page-link" ng-click="setPage(currentPage + 1)">Next</a>
+                                        </li>
+                                        <li class="page-item"
+                                            ng-class="{disabled: currentPage >= totalItems/itemsPerPage}">
+                                            <a class="page-link" ng-click="setPage(totalItems/itemsPerPage)">Last</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -79,9 +86,10 @@
                                                     <span>${{item.qty*item.unitPrice | number:2}}</span>
                                                 </td>
                                                 <td class="action" data-title="Remove"><a
-                                                    ng-click="cart.remove(item.productId)"><i class="bi bi-trash3-fill"></i></a></td>
+                                                        ng-click="cart.remove(item.productId)"><i
+                                                            class="bi bi-trash3-fill"></i></a></td>
                                             </tr>
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -142,8 +150,8 @@
                                 <label for="amount" class="col-sm-1 col-form-label"><i
                                         class="bi bi-pen-fill"></i></label>
                                 <div class="col-sm-11">
-                                    <input type="text" class="form-control input-underline" id="amount"
-                                        name="amount" required placeholder="Ghi chú đơn hàng">
+                                    <input type="text" class="form-control input-underline" id="amount" name="amount"
+                                        required placeholder="Ghi chú đơn hàng">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -158,8 +166,8 @@
                                 <label for="email" class="col-sm-4 col-form-label">Giảm
                                     Giá:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control input-underline" id="email"
-                                        name="email" required>
+                                    <input type="text" class="form-control input-underline" id="email" name="email"
+                                        required>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -167,15 +175,15 @@
                                     Khác:</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control input-underline" id="card-number"
-                                        name="card-number" required >
+                                        name="card-number" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="amount" class="col-sm-4 col-form-label">Khách
                                     Cần Trả:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control input-underline" id="amount"
-                                        name="amount" required>
+                                    <input type="text" class="form-control input-underline" id="amount" name="amount"
+                                        required>
                                 </div>
                             </div>
                             <div class="text-center">
