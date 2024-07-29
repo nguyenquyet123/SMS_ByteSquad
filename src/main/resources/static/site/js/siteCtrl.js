@@ -2,12 +2,14 @@ var site = angular.module("mySite", ["ngRoute"]);
 
 site.config(function ($httpProvider) {
   $httpProvider.defaults.headers.common["Authorization"] =
-    "Basic Y3VzdG9tZXI6MTIz";
+    "Basic Z3Vlc3Q6MTIz";
 });
 
 let host = "http://localhost:8080/api";
 
 site.controller("siteCtrl", function ($scope, $http) {
+  // ------------Xu ly Cart
+
   $scope.products = [];
   $scope.product = {};
 
@@ -97,15 +99,76 @@ site.controller("siteCtrl", function ($scope, $http) {
     }, 1000);
   };
 
+  $scope.clear = () => {
+    $scope.productWithImgs = [];
+    $scope.saveToLocalStorage();
+  };
+
   $scope.loadFromLocalStorage();
 
-  // ----------Xu ly dat hang
+  // ------------Xu ly Place order
 
-  // $scope.order = {};
+  $scope.customer = { password: "123" };
 
-  // $scope.placeOrder = () => {
-  //   $http.push(`${host}/orders`).then((resp) =>{
+  $scope.order = {
+    orderType: "a",
+    seller: "onlSeller",
+    orderDate: new Date(),
+    requiredDate: new Date(),
+    totalPrice: 4,
+    shipAddress: "",
+    billingAddress: "",
+    orderStatus: 1,
+    comments: "",
+    branch: { branchId: 6 },
+    get orderDetails() {
+      return $scope.productWithImgs.map((item) => {
+        return {
+          product: { productId: item.product.productId },
+          price: item.product.unitPrice,
+          quantity: item.product.quantity,
+        };
+      });
+    },
+    purchase() {
+      var item = angular.copy($scope.customer);
+      $http
+        .post(`${host}/customers`, item)
+        .then((resp) => {
+          $scope.order.customer = resp.data;
+          var order = angular.copy($scope.order);
+          $http
+            .post(`${host}/orders`, order)
+            .then((resp) => {
+              alert("Đặt Hàng thành công");
+              $scope.clear();
+              location.href = "http://localhost:8080/sms/orderhistory";
+            })
+            .catch((error) => {
+              alert("Đặt Hàng thất bại");
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          alert("Đặt Hàng thất bại");
+          console.log(error);
+        });
+    },
+  };
 
-  //   });
-  // };
+  // ------------Xu ly Order history
+
+  $scope.orderHistory = [];
+  $http
+    .get(`${host}/orders`)
+    .then((resp) => {
+      $scope.orderHistory = resp.data;
+      var username = { username: $("#username").text().trim() };
+      $scope.filteredOrderHistory = $scope.orderHistory.filter(
+        (order) => order.orderType === "a"
+      );
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });

@@ -1,5 +1,6 @@
 package com.poly.sms.controller.app;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.poly.sms.entity.Order;
 import com.poly.sms.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        return orderService.save(order);
+    public Order createOrder(@RequestBody JsonNode orderData) {
+        return orderService.create(orderData);
     }
 
     @PutMapping("/{id}")
@@ -44,14 +45,11 @@ public class OrderController {
             updatedOrder.setOrderType(orderDetails.getOrderType());
             updatedOrder.setSeller(orderDetails.getSeller());
             updatedOrder.setOrderDate(orderDetails.getOrderDate());
-            updatedOrder.setRequiredDate(orderDetails.getRequiredDate());
             updatedOrder.setTotalPrice(orderDetails.getTotalPrice());
             updatedOrder.setShipAddress(orderDetails.getShipAddress());
-            updatedOrder.setBillingAddress(orderDetails.getBillingAddress());
             updatedOrder.setOrderStatus(orderDetails.getOrderStatus());
             updatedOrder.setComments(orderDetails.getComments());
             updatedOrder.setBranch(orderDetails.getBranch());
-            updatedOrder.setCustomer(orderDetails.getCustomer());
             return ResponseEntity.ok(orderService.save(updatedOrder));
         } else {
             return ResponseEntity.notFound().build();

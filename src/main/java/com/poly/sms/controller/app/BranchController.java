@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/branches")
 public class BranchController {
 
     @Autowired
     private BranchService branchService;
+
+    @GetMapping("/manager/{username}")
+    public List<Branch> getBranchIdByManagerUsername(@PathVariable String username) {
+        return branchService.getBranchIdByManagerUsername(username);
+    }
 
     @GetMapping
     public ResponseEntity<List<Branch>> getAllBranches() {
@@ -37,23 +43,8 @@ public class BranchController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Branch> updateBranch(@PathVariable Integer id, @RequestBody Branch branchDetails) {
-        Optional<Branch> branch = branchService.findById(id);
-        if (branch.isPresent()) {
-            Branch existingBranch = branch.get();
-            existingBranch.setBranchType(branchDetails.getBranchType());
-            existingBranch.setBranchName(branchDetails.getBranchName());
-            existingBranch.setManagerName(branchDetails.getManagerName());
-            existingBranch.setAddress(branchDetails.getAddress());
-            existingBranch.setPhone(branchDetails.getPhone());
-            existingBranch.setEmail(branchDetails.getEmail());
-            existingBranch.setBranchState(branchDetails.getBranchState());
-            existingBranch.setEmployee(branchDetails.getEmployee());
-            Branch updatedBranch = branchService.save(existingBranch);
-            return new ResponseEntity<>(updatedBranch, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public Branch updateBranch(@PathVariable Integer id, @RequestBody Branch branchDetails) {
+        return branchService.save(branchDetails);
     }
 
     @DeleteMapping("/{id}")

@@ -27,4 +27,5 @@ public class EmployeeRole implements Serializable {
     @ManyToOne
     @JoinColumn(name = "username")
     private Employee employee;
+
 }

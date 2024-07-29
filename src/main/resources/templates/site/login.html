@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
   <!-- Required meta tags -->
@@ -28,6 +28,9 @@
               <div class="brand-logo">
                 <img src="/app/images/logo.svg" alt="logo">
               </div>
+              <div th:if="${message}" class="alert alert-success">
+                <p th:text="${message}"></p>
+            </div>
               <i th:text="${message}"></i>
               <form class="pt-3" th:action="@{/login}" method="post">
                 <div class="form-group">
