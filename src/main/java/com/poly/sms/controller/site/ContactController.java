@@ -48,7 +48,7 @@ public class ContactController {
         try {
             emailService.sendEmail(email);
             session.setAttribute("message", message);
-            emailService.save(email);
+            emailService.saveEmail(email);
             model.addAttribute("successMessage", "Email đã được gửi thành công!");
         } catch (Exception e) {
             model.addAttribute("successMessage", "Lỗi khi gửi email: " + e.getMessage());

@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package com.poly.sms.entity;
 
 import java.time.LocalDateTime;
@@ -14,73 +9,39 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-/**
- *
- * @author hoang
- */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Setter
-@Getter
+@Table(name = "Emails")
 public class Email {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Integer id;
 
-    @Column(nullable = false)
-    private String name;
+    private String sender;
 
-    @Column(nullable = false)
-    private String emailD;
+    private String subject;
 
-    @Column(nullable = false)
-    private String message;
+    private String content;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime dateTime;
+    private Boolean isRead = false;
 
-    @PrePersist
+    private LocalDateTime receivedDate;
+ @PrePersist
     protected void onCreate() {
-        this.dateTime = LocalDateTime.now(); // Thiết lập ngày giờ hiện tại khi tạo entity
+        this.receivedDate = LocalDateTime.now(); // Thiết lập ngày giờ hiện tại khi tạo entity
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.dateTime = LocalDateTime.now(); // Cập nhật ngày giờ hiện tại khi cập nhật entity
-    }
-
-    // Getters và setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmailD() {
-        return emailD;
-    }
-
-    public void setEmailD(String email) {
-        this.emailD = email;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+        this.receivedDate = LocalDateTime.now(); // Cập nhật ngày giờ hiện tại khi cập nhật entity
     }
 }

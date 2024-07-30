@@ -44,15 +44,14 @@
             class="mdi mdi-basket btn-icon-prepend"></i>
           Bán hàng</a>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown mr-1">
+          <li class="nav-item dropdown mr-1" ng-Controller="HomThuCtrl">
             <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"
-              id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-message-text mx-0"></i>
-              <span class="count"></span>
-            </a>
+            id="messageDropdown" href="#" data-toggle="dropdown">
+            <i class="mdi mdi-message-text mx-0"></i>
+            <p  style="color: rgb(234, 237, 234);border-radius: 10px; padding: 5px; background-color: rgb(25, 144, 203);" ng-if="hasNewEmail > 0">{{hasNewEmail}}&nbsp;tin nhắn mới</p>
+          </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
               <a href="#!homthu"   class="dropdown-item">Hộp thư</a>
-              <a class="dropdown-item">Thông báo</a>
             </div>
           </li>
           <li class="nav-item dropdown mr-4">
