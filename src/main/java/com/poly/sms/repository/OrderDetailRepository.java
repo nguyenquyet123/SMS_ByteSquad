@@ -15,4 +15,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Intege
             "GROUP BY od.product " +
             "ORDER BY totalQuantity DESC")
     List<Object[]> findTopOrderedProducts();
+
+    List<OrderDetail> findByOrderOrderId(Integer orderId);
 }

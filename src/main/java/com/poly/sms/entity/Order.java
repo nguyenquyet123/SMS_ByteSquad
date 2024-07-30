@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
@@ -51,9 +52,11 @@ public class Order {
     @Column(name = "comments", columnDefinition = "TEXT")
     private String comments;
 
-    private String customerName;
+    @Column(name = "customer_name", columnDefinition = "TEXT")
+    private String nguoiNhan;
 
-    private String customerPhone;
+    @Column(name = "customer_phone", columnDefinition = "TEXT")
+    private String sdtNguoiNhan;
 
     @ManyToOne
     @JoinColumn(name = "branch_id", nullable = false)

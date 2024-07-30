@@ -18,4 +18,6 @@ public interface EmployeeService {
     void deleteById(String username);
 
     Employee findByEmail(String email);
+
+    List<Employee> getEmployeesByRole(String roleId);
 }

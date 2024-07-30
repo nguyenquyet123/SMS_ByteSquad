@@ -11,11 +11,7 @@
 
               </div>
               <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">
-<<<<<<< HEAD
-
-=======
                 Sreach
->>>>>>> thinhpt
               </button>
               <div class="ml-auto">
                 <button type="button" class="btn btn-primary">
@@ -45,7 +41,7 @@
                     ng-repeat-start="branch in pager.items" ng-click="showDetails(branch)">
                     <td>{{branch.branchId}}</td>
                     <td>{{branch.branchName}}</td>
-                    <td>{{branch.managerName}}</td>
+                    <td>{{branch.managerBranch.fullname}}</td>
                     <td>{{branch.address}}</td>
                     <td>{{branch.phone}}</td>
                   </tr>
@@ -71,78 +67,51 @@
                                         <label for="customerID" class="col-sm-2 col-form-label">Mã chi
                                           nhánh</label>
                                         <div class="col-sm-4">
-<<<<<<< HEAD
-                                          <input type="text" class="form-control" id="customerID" value="1" readonly>
-=======
-                                          <input type="text" class="form-control" id="customerID" ng-model="form.branchId" readonly>
->>>>>>> thinhpt
+                                          <input type="text" class="form-control" id="customerID"
+                                            ng-model="form.branchId" readonly>
                                         </div>
                                         <label for="customerEmail" class="col-sm-2 col-form-label">Người
                                           Tạo</label>
                                         <div class="col-sm-4">
-                                          <input type="text" class="form-control" id="customerEmail" ng-model="form.employee.fullname" readonly>
+                                          <input type="text" class="form-control" id="customerEmail"
+                                            ng-model="form.nguoiTao" readonly>
                                         </div>
                                       </div>
                                       <div class="form-group row w-100 justify-content-between">
                                         <label for="customerName" class="col-sm-2 col-form-label">Tên chi
                                           nhánh</label>
                                         <div class="col-sm-4">
-<<<<<<< HEAD
-                                          <input type="text" class="form-control" id="customerName" value="Thanh Toàn"
-                                            readonly>
-=======
-                                          <input type="text" class="form-control" id="customerName" ng-model="form.branchName"
-                                            >
->>>>>>> thinhpt
+                                          <input type="text" class="form-control" id="customerName"
+                                            ng-model="form.branchName">
                                         </div>
                                         <label for="customerAddress" class="col-sm-2 col-form-label">Quản lý cửa
                                           hàng</label>
-                                        <div class="col-sm-4">
-                                          <input type="text" class="form-control" id="customerAddress"
-                                            ng-model="form.managerName">
+                                          <div class="col-sm-4">
+                                            <select class="form-control"
+                                                ng-model="form.managerBranch"
+                                                ng-options="c as c.fullname for c in selectRoleUser track by c.username">
+                                            </select>
                                         </div>
                                       </div>
                                       <div class="form-group row w-100 justify-content-between">
                                         <label for="customerEmail" class="col-sm-2 col-form-label">Địa chỉ cửa
                                           hàng</label>
                                         <div class="col-sm-4">
-<<<<<<< HEAD
-                                          <input type="text" class="form-control" id="customerEmail" value="" readonly>
-=======
-                                          <input type="text" class="form-control" id="customerEmail" ng-model="form.address">
->>>>>>> thinhpt
+                                          <input type="text" class="form-control" id="customerEmail"
+                                            ng-model="form.address">
                                         </div>
                                         <label for="customerCreateDate" class="col-sm-2 col-form-label">Số điện
                                           thoại</label>
                                         <div class="col-sm-4">
-<<<<<<< HEAD
-                                          <input type="text" class="form-control" id="customerCreateDate" value="USA"
-                                            readonly>
-=======
-                                          <input type="text" class="form-control" id="customerCreateDate" ng-model="form.phone">
->>>>>>> thinhpt
+                                          <input type="text" class="form-control" id="customerCreateDate"
+                                            ng-model="form.phone">
                                         </div>
                                       </div>
                                       <div class="form-group row w-100 justify-content-between">
                                         <label for="customerEmail" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-4">
-<<<<<<< HEAD
-                                          <input type="text" class="form-control" id="customerEmail" value="" readonly>
-                                        </div>
-                                        <label for="customerCreateDate" class="col-sm-2 col-form-label">Trạng
-                                          Thái</label>
-                                        <div class="col-sm-4">
-                                          <input type="text" class="form-control" id="customerEmail" value="" readonly>
-                                        </div>
-                                      </div>
-                                      <div class="form-group row w-100 justify-content-between">
-                                        <label for="customerEmail" class="col-sm-2 col-form-label">Người
-                                          Tạo</label>
-                                        <div class="col-sm-4">
-                                          <input type="text" class="form-control" id="customerEmail" readonly>
-=======
-                                          <input type="text" class="form-control" id="customerEmail" ng-model="form.email">
->>>>>>> thinhpt
+                                          <input type="text" class="form-control" id="customerEmail"
+                                            ng-model="form.email">
                                         </div>
                                         <label for="customerCreateDate" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-4">

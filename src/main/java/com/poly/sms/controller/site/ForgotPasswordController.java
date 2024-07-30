@@ -55,7 +55,7 @@ public class ForgotPasswordController {
             model.addAttribute("error", "Email không được tìm thấy.");
         }
 
-        return "site/forgotPassword"; // Trả về trang xác nhận
+    return "site/forgotPassword"; // Trả về t // Trả về trang xác nhận
     }
 
     public static String generateRandomString(String characters, int length) {

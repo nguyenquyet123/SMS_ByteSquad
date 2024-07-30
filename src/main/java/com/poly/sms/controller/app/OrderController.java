@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.poly.sms.entity.Order;
 import com.poly.sms.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/orders")
@@ -17,9 +19,30 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @PostMapping("/updateProd")
+    public ResponseEntity<Order> createOrUpdateOrder(@RequestBody Order order) {
+        Order savedOrder = orderService.updateProdOrder(order);
+        return new ResponseEntity<>(savedOrder, HttpStatus.OK);
+    }
+
     @GetMapping
     public List<Order> getAllOrders() {
         return orderService.findAll();
+    }
+
+    @GetMapping("/hoaDon")
+    public List<Order> getAllOrdersHoaDon() {
+        return orderService.getOrdersHoaDon();
+    }
+
+    @GetMapping("/nhapHang")
+    public List<Order> getAllOrdersNhapHang() {
+        return orderService.getOrdersNhapHang();
+    }
+
+    @GetMapping("/chuyenHang")
+    public List<Order> getAllOrdersChuyenHang() {
+        return orderService.getOrdersChuyenHang();
     }
 
     @GetMapping("/{id}")
@@ -35,6 +58,10 @@ public class OrderController {
     @PostMapping
     public Order createOrder(@RequestBody JsonNode orderData) {
         return orderService.create(orderData);
+    }
+    @PutMapping("/updateTotal/{id}")
+    public Order updateTotal(@PathVariable Integer id,@RequestBody Order order) {
+        return orderService.update(order);
     }
 
     @PutMapping("/{id}")
