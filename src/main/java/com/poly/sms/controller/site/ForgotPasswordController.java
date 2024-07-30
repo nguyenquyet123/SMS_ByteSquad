@@ -39,23 +39,25 @@ public class ForgotPasswordController {
         // Tìm người dùng theo email
         Employee employee = employeeService.findByEmail(email);
 
+    if (employee != null) {
+        // Tạo mật khẩu mới
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         int length = 6;
         String pass = generateRandomString(characters, length);
 
+        // Mã hóa mật khẩu và lưu người dùng
         employee.setPassword(passwordEncoder.encode(pass));
-
         employeeService.save(employee);
 
-        if (employee != null) {
-            // Gửi email chứa mật khẩu của người dùng
-            emailService.sendPasswordWithCredentials(employee.getEmail(), pass);
-            model.addAttribute("message", "Đã gửi mật khẩu đến email của bạn.");
-        } else {
-            model.addAttribute("error", "Email không được tìm thấy.");
-        }
+        // Gửi email chứa mật khẩu mới
+        emailService.sendPasswordWithCredentials(employee.getEmail(), pass);
+        model.addAttribute("message", "Đã gửi mật khẩu đến email của bạn.");
+    } else {
+        // Xử lý trường hợp email không tồn tại
+        model.addAttribute("error", "Email không được tìm thấy.");
+    }
 
-        return "site/forgotPassword"; // Trả về trang xác nhận
+    return "site/forgotPassword"; // Trả về t // Trả về trang xác nhận
     }
 
 

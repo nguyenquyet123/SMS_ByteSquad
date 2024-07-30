@@ -3,9 +3,11 @@ package com.poly.sms.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -54,6 +56,12 @@ public class Order {
 
     @Column(name = "comments", columnDefinition = "TEXT")
     private String comments;
+
+    @Column(name = "customer_name", columnDefinition = "TEXT")
+    private String nguoiNhan;
+
+    @Column(name = "customer_phone", columnDefinition = "TEXT")
+    private String sdtNguoiNhan;
 
     @ManyToOne
     @JoinColumn(name = "branch_id", nullable = false)

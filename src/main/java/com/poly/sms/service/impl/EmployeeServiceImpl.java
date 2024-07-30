@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.poly.sms.entity.Employee;
 import com.poly.sms.repository.EmployeeRepository;
+import com.poly.sms.repository.EmployeeRoleRepository;
 import com.poly.sms.service.EmployeeService;
 
 @Service
@@ -15,6 +16,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private EmployeeRoleRepository employeeRoleRepository;
 
     @Override
     public List<Employee> findAll() {
@@ -44,6 +48,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findByEmail(String email) {
         return employeeRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByRole(String roleId) {
+        return employeeRoleRepository.findEmployeesByRoleName(roleId);
     }
 
 }

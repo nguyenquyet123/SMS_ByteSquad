@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 public interface BranchRepository extends JpaRepository<Branch, Integer> {
     @Query("SELECT b FROM Branch b WHERE b.managerBranch.username = :username")
     List<Branch> findBranchByManagerBranchUsername(@Param("username") String username);
+
+    Branch findByBranchId(Integer branchId);
 }

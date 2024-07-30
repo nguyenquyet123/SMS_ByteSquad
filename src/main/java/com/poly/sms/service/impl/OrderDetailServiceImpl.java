@@ -39,4 +39,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public List<Object[]> findTopOrderedProducts() {
         return orderDetailRepository.findTopOrderedProducts();
     }
+
+    @Override
+    public List<OrderDetail> getAllOrderDetailByOrderID(Integer id) {
+        return orderDetailRepository.findByOrderOrderId(id);
+    }
+
+    @Override
+    public List<OrderDetail> saveAllOrderDetails(List<OrderDetail> orderDetails) {
+        return orderDetailRepository.saveAll(orderDetails);
+    }
 }
