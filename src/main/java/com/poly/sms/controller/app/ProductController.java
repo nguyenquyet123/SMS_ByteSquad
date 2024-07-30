@@ -22,6 +22,11 @@ public class ProductController {
         return productService.findAll();
     }
 
+    @GetMapping("/{id}/branch")
+    public List<Product> getProductByBranch(@PathVariable Integer id) {
+        return productService.getProductByBranch(id);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Integer id) {
         Optional<Product> product = productService.findById(id);

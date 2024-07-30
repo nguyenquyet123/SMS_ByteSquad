@@ -15,12 +15,11 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/quanLyNguoiDung", {
       templateUrl: "/app/spa/quanLyNguoiDung.html",
+      controller: "qLyUserCtrl"
     })
     .when("/thietLapNguoiDung", {
       templateUrl: "/app/spa/thietLapNguoiDung.html",
-    })
-    .when("/thietLapVaiTro", {
-      templateUrl: "/app/spa/thietLapVaiTro.html",
+      controller: "qLyUserCtrl"
     })
     .when("/f", {
       templateUrl: "/app/spa/thietLapVaiTro.html",
@@ -50,19 +49,22 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/nhaphang", {
       templateUrl: "/app/spa/nhaphang.html",
+      controller: "nhapHangCtrl"
     })
     .when("/themMoiNhapHang", {
       templateUrl: "/app/spa/themMoiNhapHang.html",
+      controller: "AddNhapHangCtrl"
     })
     .when("/chuyenhang", {
       templateUrl: "/app/spa/chuyenhang.html",
-      controller: "ChuyenHangCtrl",
+      controller: "chuyenHangCtrl"
     })
     .when("/themMoiChuyenHang", {
       templateUrl: "/app/spa/themMoiChuyenHang.html",
     })
     .when("/hoadon", {
       templateUrl: "/app/spa/hoadon.html",
+      controller: "hoaDonCtrl"
     })
     .when("/themMoiHoaDon", {
       templateUrl: "/app/spa/themMoiHoaDon.html",

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
 
+    List<Product> getProductByBranch(Integer branchId);
+
     List<Product> findAll();
 
     Optional<Product> findById(Integer id);

@@ -49,22 +49,6 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="branchAddress">Số lượng</label>
-                                    <input type="text" class="form-control" id="branchAddress"
-                                        placeholder="Nhập số lượng" ng-model="form.quantity">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="phoneNumber">Giá tiền</label>
-                                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Nhập giá tiền" ng-model="form.unitPrice">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="creator">Giảm giá</label>
-                                    <input type="text" class="form-control" id="creator"
-                                        placeholder="Nhập giảm giá của sản phẩm" ng-model="form.discount">
-                                </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="file-input-wrapper col-md-4">
                                     <button class="btn btn-primary btn-file-input">Chọn Ảnh</button>
                                     <input class="form-control" id="image" type="file"
@@ -74,7 +58,7 @@
                                     <label for="branchName">Chi Nhánh</label>
                                     <select class="form-control" ng-model="form.branch"
                                         ng-options="c as c.branchName for c in selectBoxBranchs track by c.branchId">
-                                        <option value="">Chọn Chi nhanh</option>
+                                        <option value="">Chọn Chi Nhánh</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">

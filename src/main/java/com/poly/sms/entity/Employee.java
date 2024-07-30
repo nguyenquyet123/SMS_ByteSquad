@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 
@@ -28,6 +30,7 @@ public class Employee {
 
     private String phone;
 
+    @Temporal(TemporalType.DATE)
     private Date registrationDate;
 
     @JsonIgnore

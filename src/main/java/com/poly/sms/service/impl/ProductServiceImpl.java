@@ -1,6 +1,8 @@
 package com.poly.sms.service.impl;
 
+import com.poly.sms.entity.Branch;
 import com.poly.sms.entity.Product;
+import com.poly.sms.repository.BranchRepository;
 import com.poly.sms.repository.ProductRepository;
 import com.poly.sms.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private BranchRepository branchRepository;
 
     @Override
     public List<Product> findAll() {
@@ -65,5 +70,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findProductsByCategoryId(int keywords) {
         return productRepository.findProductsByCategoryId(keywords);
+    }
+
+    @Override
+    public List<Product> getProductByBranch(Integer branchId) {
+        Branch branch = branchRepository.findByBranchId(branchId);
+        return productRepository.findByBranch(branch);
     }
 }

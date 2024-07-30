@@ -1,10 +1,57 @@
 app.controller("danhMucCtrl", function ($scope, $http) {
     $scope.form = {};
     $scope.items = [];//dùng để lưu tạm sau khi load
-   //sử dụng để hiển thị trang và tìm kiếm
+    //sử dụng để hiển thị trang và tìm kiếm
     $scope.products = [];
     $scope.username = document.getElementById('username').textContent;
-    
+
+    //Khởi Tạo
+    $scope.init = () => {
+        //load Chi nhánh
+        $http.get(`${host}/branches`).then((resp) => {
+            $scope.selectBoxBranchs = resp.data;
+        }).catch(error => {
+            console.log("Error: ", error.message)
+        });
+        console.log("select", $scope.selectedOption);
+        var url = `${host}/products`;
+        if ($scope.selectedOption) {
+            url = `${host}/products/${$scope.selectedOption.branchId}/branch`;
+        }
+        var productImagesUrl = `${host}/product-images`;
+        $http.get(url).then(respProd =>{
+            $scope.products = respProd.data;
+            $http.get(productImagesUrl).then(respProdImg =>{
+                $scope.productImages = respProdImg.data;
+
+                //Lưu danh sách sau khi load
+                $scope.items = $scope.products.map(product => {
+                    const images = $scope.productImages
+                        .filter(image => image.product.productId === product.productId)
+                        .map(image => image.url);
+                    return {
+                        ...product,
+                        images
+                    };
+                });
+                $scope.filteredItems = $scope.items;
+            }).catch(error =>{
+                console.log("ErrorProImg: ",error)
+            });
+        }).catch(error =>{
+            console.log("ErrorPro: ",error)
+        });
+        //load categories
+        $http.get(`${host}/categories`).then((resp) => {
+            $scope.selectBoxCates = resp.data;
+        });
+        //load Nhà Cung Cấp
+        $http.get(`${host}/suppliers`).then((resp) => {
+            $scope.selectBoxSuppliers = resp.data;
+        })
+    };
+
+    $scope.init();
 
     //reset
     $scope.reset = () => {
@@ -54,6 +101,8 @@ app.controller("danhMucCtrl", function ($scope, $http) {
     $scope.create = function () {
         var item = angular.copy($scope.form);
         item.productStatus = 1;
+        item.giaNhap = 0;
+        console.log("create: ",item)
         $http.post(`${host}/products`, item).then(reps => {
             $scope.product = reps.data;
             console.log("CreatePro", reps.data);
@@ -73,7 +122,7 @@ app.controller("danhMucCtrl", function ($scope, $http) {
         $http.put(`${host}/products/${item.productId}`, item).then(reps => {
             var index = $scope.items.findIndex(p => p.productId == item.productId);
             $scope.items[index] = item;
-            
+
             alert("Cap nhat thanh cong");
             console.log("Update : ", $scope.items[index]);
         }).catch(error => {
@@ -85,7 +134,6 @@ app.controller("danhMucCtrl", function ($scope, $http) {
     //Hiển thị table
     $scope.selectedRow = null;
     $scope.showDetails = function (row) {
-        console.log(row)
         $scope.form = angular.copy(row);
         if ($scope.selectedRow === row) {
             $scope.selectedRow = null;
@@ -146,47 +194,4 @@ app.controller("danhMucCtrl", function ($scope, $http) {
         }
     };
     //End
-
-    //Khởi Tạo
-    $scope.init = () => {
-        var url = `${host}/products`;
-        var productImagesUrl = `${host}/product-images`;
-        Promise.all([$http.get(url), $http.get(productImagesUrl)])
-            .then(([productsResp, imagesResp]) => {
-                $scope.products = productsResp.data;
-                $scope.productImages = imagesResp.data;
-
-                //Lưu danh sách sau khi load
-                $scope.items = $scope.products.map(product => {
-                    const images = $scope.productImages
-                        .filter(image => image.product.productId === product.productId)
-                        .map(image => image.url);
-                    return {
-                        ...product,
-                        images
-                    };
-                });
-                console.log("Khởi tạo: ", $scope.items)
-                $scope.filteredItems = $scope.items;
-                console.log("Khởi tạo fill 2: ", $scope.filteredItems);
-            }).catch((error) => {
-                console.log("Error", error);
-            });
-        //load categories
-        $http.get(`${host}/categories`).then((resp) => {
-            $scope.selectBoxCates = resp.data;
-        });
-        //load categories
-        $http.get(`${host}/suppliers`).then((resp) => {
-            $scope.selectBoxSuppliers = resp.data;
-        })
-        //load Chi nhánh
-        $http.get(`${host}/branches`).then((resp) => {
-            $scope.selectBoxBranchs = resp.data;
-        }).catch(error =>{
-            console.log("Error: ",error.message)
-        })
-    };
-
-    $scope.init();
 });
