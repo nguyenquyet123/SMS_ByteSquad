@@ -7,6 +7,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {
+    Order update(Order order);
+
+    Order updateProdOrder(Order order);
+
+    List<Order> getOrdersHoaDon();
+
+    List<Order> getOrdersNhapHang();
+
+    List<Order> getOrdersChuyenHang();
 
     List<Order> findAll();
 

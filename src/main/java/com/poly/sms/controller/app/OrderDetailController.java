@@ -21,6 +21,11 @@ public class OrderDetailController {
         return orderDetailService.findAll();
     }
 
+    @GetMapping("/OrderId/{id}")
+    public List<OrderDetail> getAllOrderDetailsByOrderId(@PathVariable Integer id) {
+        return orderDetailService.getAllOrderDetailByOrderID(id);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<OrderDetail> getOrderDetailById(@PathVariable Integer id) {
         Optional<OrderDetail> orderDetail = orderDetailService.findById(id);
@@ -29,6 +34,11 @@ public class OrderDetailController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/saveAll")
+    public List<OrderDetail> saveAllObjects(@RequestBody List<OrderDetail> objects) {
+        return orderDetailService.saveAllOrderDetails(objects);
     }
 
     @PostMapping

@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +34,9 @@ public class OrderDetail {
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
+
+    @Column(name = "import_price" , precision = 10, scale = 2)
+    private BigDecimal import_price;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)

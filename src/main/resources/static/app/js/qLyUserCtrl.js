@@ -1,9 +1,7 @@
-app.controller('QLChiNhanhCtrl', function ($scope, $http) {
+app.controller('qLyUserCtrl', function ($scope, $http) {
     $scope.form = {};//đọc dữ liệu trên form
     $scope.items = [];//dùng để lưu tạm sau khi load
     $scope.filteredItems = [];
-    $scope.username = document.getElementById('username').textContent;
-    console.log($scope.username);
 
     //reset
     $scope.reset = () => {
@@ -11,42 +9,25 @@ app.controller('QLChiNhanhCtrl', function ($scope, $http) {
     }
     //Create
     $scope.create = function () {
-        console.log("start");
-
-        $http.get(`${host}/employees/${$scope.username}`).then(reps => {
-            $scope.form.employee = reps.data;
-            console.log("employee:", reps.data);
-
-            // Các dòng lệnh sau sẽ chỉ được thực thi sau khi lấy được dữ liệu nhân viên
-            $scope.form.nguoiTao = reps.data.fullname
-            $scope.form.branchType = "Retail";
-            $scope.form.branchState = 1;
-            console.log("Form: ", $scope.form);
-            var item = angular.copy($scope.form);
-            console.log("item: ", item);
-
-            $http.post(`${host}/branches`, item).then(reps => {
-                $scope.items.push(reps.data);
-                console.log("Create:", reps.data);
-                alert("Thêm mới thành công");
-                $scope.reset();
-            }).catch(error => {
-                alert("Thêm mới thất bại");
-                console.log("Error", error);
-            });
+        $scope.form.registrationDate = new Date();
+        var item = angular.copy($scope.form);
+        $http.post(`${host}/employees`, item).then(reps => {
+            $scope.items.push(reps.data);
+            console.log("Create:", reps.data);
+            alert("Them moi thanh cong");
+            $scope.reset();
         }).catch(error => {
-            alert("Không thể lấy dữ liệu nhân viên");
+            alert("Them moi that bai");
             console.log("Error", error);
-        });
-    };
-    
+        })
+    }
 
     //Update
     $scope.update = function () {
         var item = angular.copy($scope.form);
         console.log(item)
-        $http.put(`${host}/branches/${item.branchId}`, item).then(reps => {
-            var index = $scope.items.findIndex(p => p.branchId == item.branchId);
+        $http.put(`${host}/employees/${item.username}`, item).then(reps => {
+            var index = $scope.items.findIndex(p => p.username == item.username);
             $scope.items[index] = item;
             alert("Cap nhat thanh cong");
             console.log("Update : ", reps.data)
@@ -72,15 +53,13 @@ app.controller('QLChiNhanhCtrl', function ($scope, $http) {
     $scope.searchKeyword = '';
 
     $scope.filterItems = function () {
-        console.log("a", $scope.filteredItems)
-        console.log("b", $scope.items)
+        console.log("a",$scope.filteredItems)
+        console.log("b",$scope.items)
         $scope.filteredItems = $scope.items.filter(function (item) {
             //Các trường của list số + .toString(),chữ + toLowerCase()
-            return item.branchId.toString().includes($scope.searchKeyword) ||
-                item.branchName.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
-                item.managerName.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
-                item.address.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
-                item.phone.toString().includes($scope.searchKeyword);
+            return item.username.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
+                item.fullname.toLowerCase().includes($scope.searchKeyword.toLowerCase()) ||
+                item.email.toLowerCase().includes($scope.searchKeyword.toLowerCase());
         });
         $scope.pager.first();
     };
@@ -120,20 +99,16 @@ app.controller('QLChiNhanhCtrl', function ($scope, $http) {
     //Khởi Tạo
     $scope.init = () => {
         //load categories
-        $http.get(`${host}/branches`).then((resp) => {
+        $http.get(`${host}/employees`).then((resp) => {
             //Lưu danh sách sau khi load
             $scope.items = resp.data;
             //filteredItems sử dụng để tìm kiếm,đổ tất cả lên trang hoặc theo key search
             $scope.filteredItems = $scope.items;
-            console.log("Branch: ", $scope.items)
+            console.log("employees: ", $scope.items)
         }).catch((error) => {
             console.log("Error", error);
         });
-        //load categories
-        $http.get(`${host}/employees/roleUser`).then((resp) => {
-            $scope.selectRoleUser = resp.data;
-        })
     };
-    $scope.init();
 
+    $scope.init();
 });

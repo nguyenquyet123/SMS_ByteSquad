@@ -1,5 +1,6 @@
 package com.poly.sms.repository;
 
+import com.poly.sms.entity.Branch;
 import com.poly.sms.entity.Product;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+
+    List<Product> findByBranch(Branch branch);
 
     List<Product> findTop6ByOrderByDiscountDesc();
 

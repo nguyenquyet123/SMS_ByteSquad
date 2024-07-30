@@ -36,6 +36,11 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
+    @GetMapping("/roleUser")
+    public List<Employee> getEmployeesByRole() {
+        return employeeService.getEmployeesByRole("USER");
+    }
+
     @GetMapping("/{username}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("username") String username) {
         return employeeService.findById(username)

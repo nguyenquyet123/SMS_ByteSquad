@@ -42,11 +42,14 @@ public class Product {
     @Column(name = "product_name", nullable = false, length = 50, columnDefinition = "NVARCHAR")
     private String productName;
 
-    @Column(name = "quantity", nullable = false)
+    @Column(name = "quantity", nullable = true)
     private Integer quantity;
 
-    @Column(name = "unit_price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "unit_price", nullable = true, precision = 10, scale = 2)
     private BigDecimal unitPrice;
+
+    @Column(name = "import_price", nullable = true, precision = 10, scale = 2)
+    private BigDecimal giaNhap;
 
     @Column(name = "product_status", nullable = false)
     private Integer productStatus;
