@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,34 +28,39 @@ public class ForgotPasswordController {
     @Autowired
     private EmailService emailService; // Dịch vụ gửi email
 
-    @GetMapping("forgot")
+    @RequestMapping("forgot")
     public String forgot() {
-
         return "site/forgotPassword"; // Tìm kiếm tệp tại src/main/resources/templates/site/forgotPassword.html
     }
 
+    @SuppressWarnings("unused")
     @PostMapping("forgot")
     public String handlePasswordReset(@RequestParam("email") String email, Model model) {
         // Tìm người dùng theo email
+        Employee employee = employeeService.findByEmail(email);
 
-        if (employeeService.findByEmail(email) != null) {
-            Employee employee = employeeService.findByEmail(email);
-            // Gửi email chứa mật khẩu của người dùng
-            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            int length = 6;
-            String pass = generateRandomString(characters, length);
+    if (employee != null) {
+        // Tạo mật khẩu mới
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int length = 6;
+        String pass = generateRandomString(characters, length);
 
-            employee.setPassword(passwordEncoder.encode(pass));
+        // Mã hóa mật khẩu và lưu người dùng
+        employee.setPassword(passwordEncoder.encode(pass));
+        employeeService.save(employee);
 
-            employeeService.save(employee);
-            emailService.sendPasswordWithCredentials(employee.getEmail(), pass);
-            model.addAttribute("message", "Đã gửi mật khẩu đến email của bạn.");
-        } else {
-            model.addAttribute("error", "Email không được tìm thấy.");
-        }
+        // Gửi email chứa mật khẩu mới
+        emailService.sendPasswordWithCredentials(employee.getEmail(), pass);
+        model.addAttribute("message", "Đã gửi mật khẩu đến email của bạn.");
+    } else {
+        // Xử lý trường hợp email không tồn tại
+        model.addAttribute("error", "Email không được tìm thấy.");
+    }
 
     return "site/forgotPassword"; // Trả về t // Trả về trang xác nhận
     }
+
+
 
     public static String generateRandomString(String characters, int length) {
         Random random = new Random();

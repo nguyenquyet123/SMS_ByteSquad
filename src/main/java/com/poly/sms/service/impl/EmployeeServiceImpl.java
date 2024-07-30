@@ -55,4 +55,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRoleRepository.findEmployeesByRoleName(roleId);
     }
 
+
+    @Override
+    public void updateNew(Employee employee) {
+        Employee existingEmployee = employeeRepository.findByUsername(employee.getUsername());
+        if (existingEmployee != null) {
+            // Giữ nguyên mật khẩu cũ
+            employee.setPassword(existingEmployee.getPassword());
+            employeeRepository.save(employee);
+        }
+
+    }
 }
