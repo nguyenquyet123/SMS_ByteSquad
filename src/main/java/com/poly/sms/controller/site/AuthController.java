@@ -1,6 +1,10 @@
 package com.poly.sms.controller.site;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,8 +42,21 @@ public class AuthController {
     }
 
     @RequestMapping("oauth2/login/success")
-    public String oauth2(OAuth2AuthenticationToken oau) {
-        accountDetailService.loginFromOAuth2(oau);
+    public String oauth2() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication instanceof OAuth2AuthenticationToken) {
+            OAuth2AuthenticationToken oau = (OAuth2AuthenticationToken) authentication;
+            accountDetailService.loginFromOAuth2(oau);
+        } else if (authentication instanceof UsernamePasswordAuthenticationToken) {
+            UsernamePasswordAuthenticationToken usernamePasswordAuth = (UsernamePasswordAuthenticationToken) authentication;
+            accountDetailService.loadUserByUsername(usernamePasswordAuth.getName());
+        } else if (authentication instanceof AnonymousAuthenticationToken) {
+            // Người dùng chưa đăng nhập
+            return "redirect:/sms/login"; // Hoặc bất kỳ trang nào bạn muốn chuyển hướng khi người dùng chưa đăng nhập
+        } else {
+            throw new IllegalStateException("Unexpected authentication type: " + authentication);
+        }
         return "forward:/sms/home";
     }
 
