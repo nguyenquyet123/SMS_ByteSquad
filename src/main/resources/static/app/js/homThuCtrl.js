@@ -18,20 +18,6 @@ app.controller("HomThuCtrl", function ($scope, $http) {
         console.log("Error", error);
       });
   };
-  // $scope.load_all = () => {
-  //   $http
-  //     .get(`${host}/emails`)
-  //     .then((resp) => {
-  //       $scope.items = resp.data;
-  //       $scope.items.reverse();
-  //     })
-  //     .catch((error) => {
-  //       console.log("Error", error);
-  //     });
-  // };
-
-
-// Hàm showDetails cập nhật item và gọi PUT request
 $scope.showDetails = function (row) {
     $scope.item = angular.copy(row);
     $scope.item.isRead = true;

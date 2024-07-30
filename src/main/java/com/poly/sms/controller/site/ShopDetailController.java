@@ -37,6 +37,8 @@ public class ShopDetailController {
     public String shopDetail(Model model, @PathVariable("id") int id) {
         Product product = productService.findById(id).orElse(new Product());
 
+        List<ProductImage> productImages = productImageService.findProImgByPro(id);
+
         List<Product> products = productService.findProductsByCategoryId(product.getCategory().getCategoryId());
 
         List<ProductWithImage> productWithImages = getProductWithImages(products);
@@ -52,6 +54,7 @@ public class ShopDetailController {
         List<ProductWithImage> dicountProductWithImages = getProductWithImages(dicounProducts);
 
         model.addAttribute("selectedProductWithImage", selectedProductWithImage);
+        model.addAttribute("productImages", productImages);
         model.addAttribute("productWithImages", productWithImages);
         model.addAttribute("dicountProductWithImages", dicountProductWithImages);
         return "site/shop-detail";
