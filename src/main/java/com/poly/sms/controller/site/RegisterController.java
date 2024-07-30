@@ -22,7 +22,6 @@ public class RegisterController {
         model.addAttribute("employee", new Employee());
         return "site/register";
     }
-
     @Autowired
     private EmployeeService employeeService;
 
