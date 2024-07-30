@@ -1,9 +1,9 @@
 package com.poly.sms.service;
 
-import com.poly.sms.entity.Employee;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.poly.sms.entity.Employee;
 
 public interface EmployeeService {
 
@@ -20,4 +20,6 @@ public interface EmployeeService {
     Employee findByEmail(String email);
 
     List<Employee> getEmployeesByRole(String roleId);
+
+    void updateNew(Employee employee);
 }
