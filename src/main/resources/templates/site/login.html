@@ -52,10 +52,10 @@
                       password?</a></label>
                 </div>
                 <div class="mb-2">
-                  <button type="button" class="btn btn-block btn-google auth-form-btn">
+                  <a th:href="@{/oauth2/authorization/google}" type="button" class="btn btn-block btn-google auth-form-btn">
                     <i class="mdi mdi-google mr-2"></i>
                     Connect using google
-                  </button>
+                  </a>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
                   Don't have an account? <a th:href="@{/sms/register}" class="text-primary">Create</a>

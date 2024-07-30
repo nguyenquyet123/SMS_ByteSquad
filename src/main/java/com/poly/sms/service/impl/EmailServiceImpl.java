@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 package com.poly.sms.service.impl;
 
+import java.util.List;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,25 +10,42 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.poly.sms.entity.Email;
+import com.poly.sms.repository.EmailRepository;
 import com.poly.sms.service.EmailService;
 
-/**
- *
- * @author hoang
- */
 @Service
-public class EmailServiceImpl implements EmailService{
+public class EmailServiceImpl implements EmailService {
 
-
-
-     @Autowired
+    @Autowired
     private JavaMailSender mailSender;
+    @Autowired
+    private EmailRepository emailRepository;
+
+    @Override
+    public long getUnreadEmailCount() {
+        return emailRepository.countByIsReadFalse();
+    }
+
+    @Override
+    public Email saveEmail(Email email) {
+        return emailRepository.save(email);
+    }
+
+    @Override
+    public Email getEmailById(Integer id) {
+        return emailRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteEmail(Integer id) {
+        emailRepository.deleteById(id);
+    }
 
     @Override
     public void sendEmail(Email email) {
         Properties props = new Properties();
 
-		props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -39,8 +53,8 @@ public class EmailServiceImpl implements EmailService{
         props.put("mail.smtp.debug", "true");
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("hoangthanhtuyen.ksmy@gmail.com");
-        message.setSubject("New message from " + email.getName());
-        message.setText(email.getMessage() + "\n\nFrom: " + email.getEmailD());
+        message.setSubject("New message from " + email.getSender());
+        message.setText(email.getContent() + "\n\nFrom: " + email.getSubject());
 
         try {
             mailSender.send(message);
@@ -50,8 +64,8 @@ public class EmailServiceImpl implements EmailService{
             throw new RuntimeException("Error sending email: " + e.getMessage());
         }
 
-
     }
+
     @Override
     public void sendPasswordWithCredentials(String to, String password) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -60,4 +74,9 @@ public class EmailServiceImpl implements EmailService{
         message.setText("Mật khẩu của bạn là: " + password);
         mailSender.send(message);
     }
+
+    @Override
+    public List<Email> findAll() {
+        return emailRepository.findAll();
     }
+}

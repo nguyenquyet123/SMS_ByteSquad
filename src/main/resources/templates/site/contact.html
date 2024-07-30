@@ -60,9 +60,9 @@
                         </div>
                         <div class="col-lg-7">
                             <form th:action="@{/sms/send}" th:object="${email}" method="post">
-                                <input type="text" th:field="*{name}" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name" required>
-                                <input for ="email" type="email" th:field="*{emailD}" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email" required>
-                                <textarea th:field="*{message}" class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message" required></textarea>
+                                <input type="text" th:field="*{sender}" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name" required>
+                                <input for ="email" type="email" th:field="*{subject}" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email" required>
+                                <textarea th:field="*{content}" class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message" required></textarea>
                                 <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary" type="submit">Send Email</button>
                             </form>
                             <div th:if="${successMessage != null}" class="alert alert-success mt-3" th:text="${successMessage}"></div>

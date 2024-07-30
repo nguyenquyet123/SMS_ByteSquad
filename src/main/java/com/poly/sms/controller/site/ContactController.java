@@ -1,5 +1,6 @@
 package com.poly.sms.controller.site;
 
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +17,11 @@ import com.poly.sms.service.EmailService;
 @RequestMapping("sms")
 public class ContactController {
 
-
     // @RequestMapping("contact")
     // public String requestMethodName() {
-    //     return  "site/contact";
+    // return "site/contact";
     // }
-    
+
     @Autowired
     private EmailService emailService;
 
@@ -31,14 +31,17 @@ public class ContactController {
         return "site/contact";
     }
 
-      @PostMapping("send")
+    @PostMapping("send")
     public String sendEmail(@ModelAttribute Email email, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("errorMessage", "Vui lòng kiểm tra các lỗi nhập liệu.");
             return "site/contact";
         }
         try {
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            email.setReceivedDate(currentDateTime);
             emailService.sendEmail(email);
+            emailService.saveEmail(email);
             model.addAttribute("successMessage", "Email đã được gửi thành công!");
         } catch (Exception e) {
             model.addAttribute("successMessage", "Lỗi khi gửi email: " + e.getMessage());
@@ -46,4 +49,3 @@ public class ContactController {
         return "site/contact";
     }
 }
-

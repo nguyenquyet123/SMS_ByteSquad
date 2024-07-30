@@ -127,7 +127,9 @@ app.controller("banHangCtrl", function ($scope, $http) {
   $scope.order = {
     orderType: "off",
     orderDate: new Date(),
-    totalPrice: $scope.cart.amount,
+    get totalPrice() {
+      return $scope.cart.amount;
+    },
     orderStatus: 1,
     branch: { branchId: 3 },
     get orderDetails() {

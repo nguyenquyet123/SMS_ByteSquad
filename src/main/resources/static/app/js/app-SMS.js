@@ -56,6 +56,7 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/chuyenhang", {
       templateUrl: "/app/spa/chuyenhang.html",
+      controller: "ChuyenHangCtrl",
     })
     .when("/themMoiChuyenHang", {
       templateUrl: "/app/spa/themMoiChuyenHang.html",
@@ -80,9 +81,11 @@ app.config(function ($routeProvider, $httpProvider) {
     })
     .when("/nhacungcap", {
       templateUrl: "/app/spa/nhacungcap.html",
+      controller: "SupplierCtrl",
     })
     .when("/themMoiNhaCungCap", {
       templateUrl: "/app/spa/themMoiNhaCungCap.html",
+      controller: "SupplierCtrl",
     })
     .when("/bccuoingay", {
       templateUrl: "/app/spa/bccuoingay.html",
@@ -100,6 +103,10 @@ app.config(function ($routeProvider, $httpProvider) {
     .when("/authority", {
       templateUrl: "/app/spa/authority.html",
       controller: "authorityCtrl",
+    })
+    .when("/homthu", {
+      templateUrl: "/app/spa/homthu.html",
+      controller: "EmailController",
     })
     .otherwise({
       redirectTo: "/",

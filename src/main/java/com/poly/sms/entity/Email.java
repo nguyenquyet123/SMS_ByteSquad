@@ -1,65 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package com.poly.sms.entity;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 
-/**
- *
- * @author hoang
- */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name = "Emails")
 public class Email {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Integer id;
 
-    @Column(nullable = false)
-    private String name;
+    private String sender;
 
-    @Column(nullable = false)
-    private String emailD;
+    private String subject;
 
-    @Column(nullable = false)
-    private String message;
+    private String content;
 
-    // Getters và setters
-    public Long getId() {
-        return id;
-    }
+    private Boolean isRead = false;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmailD() {
-        return emailD;
-    }
-
-    public void setEmailD(String email) {
-        this.emailD = email;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    private LocalDateTime receivedDate;
 }
