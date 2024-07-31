@@ -79,9 +79,8 @@
                         <div class="row g-4">
                             <div class="col-md-6 col-lg-4 col-xl-3" th:each="productWithImage : ${productWithImages}">
                                 <div class="rounded position-relative fruite-item">
-                                    <div class="fruite-img"
-                                        style="position: relative; width: 100%; padding-bottom: 100%;">
-                                        <a style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                    <div class="fruite-img" style="position: relative; width: 100%; padding-bottom: 100%;">
+                                        <a   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
                                             th:href="@{/sms/shopdetails/{productId}(productId=${productWithImage.product.productId})}">
 
                                             <img th:src="${'/site/img/' + productWithImage.productImage.url}"

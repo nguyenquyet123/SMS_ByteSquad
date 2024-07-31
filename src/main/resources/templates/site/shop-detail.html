@@ -60,11 +60,11 @@
                             </div>
                         </div>
                         <div class="row g-4 mt-1">
-                            <div class="col-lg-2" th:each="item, iterStat : ${productImages}"
-                                th:if="${iterStat.index < 4}">
+                            <div class="col-lg-2" th:each="item, iterStat : ${productImages}" th:if="${iterStat.index < 4}">
                                 <div class="border rounded" style="width: 100%; height: 150px; overflow: hidden;">
-                                    <img class="img-fluid rounded" th:src="${'/site/img/' + item.url}"
-                                        style="width: 100%; height: 150px">
+                                    <img class="img-fluid rounded" 
+                                         th:src="${'/site/img/' + item.url}"
+                                         style="width: 100%; height: 150px">
                                 </div>
                             </div>
                         </div>
