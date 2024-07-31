@@ -1,13 +1,14 @@
 var site = angular.module("mySite", ["ngRoute"]);
 
 site.config(function ($httpProvider) {
-  $httpProvider.defaults.headers.common["Authorization"] = "Basic YWRtaW46MTIz";
+  $httpProvider.defaults.headers.common["Authorization"] = "Basic Z3Vlc3Q6MTIz";
 });
 let host = "http://localhost:8080/api";
 
 site.controller("siteCtrl", function ($scope, $http) {
   // ------------Xu ly Cart
-
+  $scope.username = document.getElementById('username').textContent;
+  
   $scope.products = [];
   $scope.product = {};
 
@@ -107,17 +108,19 @@ site.controller("siteCtrl", function ($scope, $http) {
   // ------------Xu ly Place order
 
   $scope.order = {
-    orderType: "onl",
+    orderType: "online",
     orderDate: new Date(),
+    seller: $scope.username,
     totalPrice: $scope.total(),
     orderStatus: 1,
-    branch: { branchId: 3 },
+    branch: { branchId: 1 },
     get orderDetails() {
       return $scope.productWithImgs.map((item) => {
         return {
           product: { productId: item.product.productId },
           price: item.product.unitPrice,
           quantity: item.product.quantity,
+          import_price: 0,
         };
       });
     },
@@ -139,18 +142,19 @@ site.controller("siteCtrl", function ($scope, $http) {
 
   // ------------Xu ly Order history
 
-  // $scope.orderHistory = [];
-  // $http
-  //   .get(`${host}/orders`)
-  //   .then((resp) => {
-  //     $scope.orderHistory = resp.data;
-  //     var username = { username: $("#username").text().trim() };
-  //     $scope.filteredOrderHistory = $scope.orderHistory.filter(
-  //       (order) => order.branch.managerBranch.username === username
-  //     );
-  //     console.log($scope.orderHistory);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+  $scope.orderHistory = [];
+  console.log($scope.username)
+  $http
+    .get(`${host}/orders/${$scope.username}/history`)
+    .then((resp) => {
+      $scope.orderHistory = resp.data;
+      // var username = { username: $("#username").text().trim() };
+      // $scope.filteredOrderHistory = $scope.orderHistory.filter(
+      //   (order) => order.branch.managerBranch.username === username
+      // );
+      // console.log($scope.orderHistory);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });

@@ -105,4 +105,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersHoaDon() {
         return orderRepository.findOrdersByStatus(3);
     }
+
+    @Override
+    public List<Order> getOrdersHistory(String seller) {
+        return orderRepository.findOrdersUsername(seller);
+    }
 }

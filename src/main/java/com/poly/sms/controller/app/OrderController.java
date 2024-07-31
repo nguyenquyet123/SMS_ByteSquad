@@ -35,6 +35,11 @@ public class OrderController {
         return orderService.getOrdersHoaDon();
     }
 
+    @GetMapping("/{id}/history")
+    public List<Order> getAllOrdersHistory(@PathVariable String id) {
+        return orderService.getOrdersHistory(id);
+    }
+
     @GetMapping("/nhapHang")
     public List<Order> getAllOrdersNhapHang() {
         return orderService.getOrdersNhapHang();

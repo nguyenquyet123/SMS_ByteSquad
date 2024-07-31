@@ -57,16 +57,22 @@
                             <a href="#" class="nav-link" data-bs-toggle="dropdown">
                                 <i class="fas fa-user fa-2x"></i>
                                 <th:block sec:authorize="isAuthenticated()">
-                                    <span id="username" th:text="'[' + ${#authentication.name} + ']'"></span>
+                                   <b>[<span id="username" sec:authentication="name"></span>]</b>
                                 </th:block>
                             </a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a th:href="@{/sms/login}" class="dropdown-item">Login</a>
-                                <a th:href="@{/sms/register}" class="dropdown-item">Register</a>
-                                <a th:href="@{/sms/forgot}" class="dropdown-item">ForgotPassword</a>
-                                <a th:href="@{/sms/myaccount}" class="dropdown-item">My account</a>
-                                <a th:href="@{/sms/reset-password}" class="dropdown-item">Change Password</a>
-                                <a th:href="@{/sms/logout}" class="dropdown-item">Logout</a>
+                                <th:block sec:authorize="!isAuthenticated()">
+                                    <a th:href="@{/sms/login}" class="dropdown-item">Login</a>
+                                    <a th:href="@{/sms/register}" class="dropdown-item">Register</a>
+                                    <a th:href="@{/sms/forgot}" class="dropdown-item">ForgotPassword</a>
+                                </th:block>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <a th:href="@{/sms/orderhistory}" class="dropdown-item">My History</a>
+                                    <a th:href="@{/sms/myaccount}" class="dropdown-item">My account</a>
+                                    <a th:href="@{/sms/reset-password}" class="dropdown-item">Change Password</a>
+                                    <a th:href="@{/sms/logout}" class="dropdown-item">Logout</a>
+                                </th:block>
+
                             </div>
                         </div>
                         <!-- <a href="#" class="my-auto">

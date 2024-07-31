@@ -11,6 +11,8 @@ public interface OrderService {
 
     Order updateProdOrder(Order order);
 
+    List<Order> getOrdersHistory(String seller);
+    
     List<Order> getOrdersHoaDon();
 
     List<Order> getOrdersNhapHang();
