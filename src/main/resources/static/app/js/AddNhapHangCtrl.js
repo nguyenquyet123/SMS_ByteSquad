@@ -40,6 +40,7 @@ app.controller("AddNhapHangCtrl", function ($scope, $http) {
         var productImagesUrl = `${host}/product-images`;
         var url = `${host}/products`;
         if ($scope.selectedOption) {
+            $scope.currentPage = 1;
             $scope.cart.clear();
             url = `${host}/products/${$scope.selectedOption.branchId}/branch`;
         }
@@ -66,6 +67,7 @@ app.controller("AddNhapHangCtrl", function ($scope, $http) {
         }).catch(error => {
             console.log("ErrorPro: ", error)
         });
+
         //Load Nhà cung cấp
         $http.get(`${host}/suppliers`).then((resp) => {
             $scope.selectBoxSuppliers = resp.data;

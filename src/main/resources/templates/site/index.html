@@ -79,8 +79,9 @@
                         <div class="row g-4">
                             <div class="col-md-6 col-lg-4 col-xl-3" th:each="productWithImage : ${productWithImages}">
                                 <div class="rounded position-relative fruite-item">
-                                    <div class="fruite-img" style="position: relative; width: 100%; padding-bottom: 100%;">
-                                        <a   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                    <div class="fruite-img"
+                                        style="position: relative; width: 100%; padding-bottom: 100%;">
+                                        <a style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
                                             th:href="@{/sms/shopdetails/{productId}(productId=${productWithImage.product.productId})}">
 
                                             <img th:src="${'/site/img/' + productWithImage.productImage.url}"
@@ -92,9 +93,9 @@
                                         th:text="${productWithImage.product.category.name}"></div>
                                     <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                         <h4 th:text="${productWithImage.product.productName}"></h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-0"
-                                                th:text="'$' + ${productWithImage.product.unitPrice} + ' / kg'"></p>
+                                        <div>
+                                            <h4 class="mb-3"
+                                                th:text="'$' + ${productWithImage.product.unitPrice} + ' / kg'"></h4>
                                             <a th:attr="ng-click=@{|add(${productWithImage.product.productId})|}"
                                                 class="btn border border-secondary rounded-pill px-3 text-primary"><i
                                                     class="fa fa-shopping-bag me-2 text-primary"></i> Add to

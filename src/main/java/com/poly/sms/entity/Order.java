@@ -45,6 +45,8 @@ public class Order {
     @Column(name = "ship_address", nullable = false, length = 100, columnDefinition = "NVARCHAR")
     private String shipAddress;
 
+    @Column(name = "seller", nullable = false, length = 100, columnDefinition = "NVARCHAR")
+    private String seller;
 
     @Column(name = "order_status", nullable = false)
     private Integer orderStatus;

@@ -60,11 +60,11 @@
                             </div>
                         </div>
                         <div class="row g-4 mt-1">
-                            <div class="col-lg-2" th:each="item, iterStat : ${productImages}" th:if="${iterStat.index < 4}">
+                            <div class="col-lg-2" th:each="item, iterStat : ${productImages}"
+                                th:if="${iterStat.index < 4}">
                                 <div class="border rounded" style="width: 100%; height: 150px; overflow: hidden;">
-                                    <img class="img-fluid rounded" 
-                                         th:src="${'/site/img/' + item.url}"
-                                         style="width: 100%; height: 150px">
+                                    <img class="img-fluid rounded" th:src="${'/site/img/' + item.url}"
+                                        style="width: 100%; height: 150px">
                                 </div>
                             </div>
                         </div>
@@ -91,9 +91,9 @@
                                             <!-- <h5 class="text-danger text-decoration-line-through"
                                                 th:text="'$' + ${item.product.unitPrice}">
                                             </h5> -->
-                                            <h5 class="fw-bold me-2"
+                                            <h4 class="fw-bold me-2"
                                                 th:text="'$' + ${item.product.unitPrice * (1 - item.product.discount)}">
-                                            </h5>
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@
                                         th:text="${productWithImage.product.category.name}"></div>
                                     <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                         <h4 th:text="${productWithImage.product.productName}"></h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <div>
                                             <p class="text-dark fs-5 fw-bold mb-0"
                                                 th:text="'$' + ${productWithImage.product.unitPrice} + ' / kg'"></p>
                                             <a th:attr="ng-click=@{|add(${productWithImage.product.productId})|}"

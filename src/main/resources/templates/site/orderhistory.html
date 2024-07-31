@@ -48,11 +48,11 @@
                             </thead>
                             <tbody>
                                 <!-- Dòng dữ liệu ví dụ -->
-                                <tr ng-repeat="item in filteredOrderHistory">
+                                <tr ng-repeat="item in orderHistory">
                                     <th>{{item.orderId}}</th>
                                     <td>{{item.seller}}</td>
                                     <td>{{item.orderDate}}</td>
-                                    <td>{{item.orderStatus}}</td>
+                                    <td>{{item.orderStatus === 3 ? 'Đã Hoàn Thành': 'Đang Giao'}}</td>
                                     <td>{{item.totalPrice}}</td>
                                 </tr>
                                 <!-- Thêm nhiều dòng dữ liệu khác nếu cần -->
