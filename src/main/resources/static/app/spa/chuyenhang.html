@@ -36,7 +36,7 @@
                                     ng-repeat-start="item in page" ng-click="showDetails(item)">
                                         <td>{{item.orderId}}</td>
                                         <td>{{item.orderDate}}</td>
-                                        <td>{{item.orderType}}</td>
+                                        <td>{{item.orderType === 'Đơn Nhập' ? 'a' : 'b'}}</td>
                                         <td>{{item.shipAddress}}</td>
                                         <td>{{item.orderStatus == 2 ? 'Đang Giao':'Đã Hoành Thành'}}</td>
                                         <td>{{item.seller}}</td>
